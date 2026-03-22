@@ -2,13 +2,13 @@
 
 **Outil de calcul de rentabilité des crafts pour Dofus 3 (Unity)**
 
-> Créé par [@Tenmalexis](https://www.youtube.com/@Tenmalexis) — YouTubeur Dofus
+> Créé par <a href="https://www.youtube.com/@Tenmalexis" target="_blank">@Tenmalexis</a> — YouTubeur Dofus
 
 ---
 
 ## 🔗 Accès direct
 
-👉 **[Ouvrir le Calculateur Craft](https://tenmalexis.github.io/Calculateur-Craft-Dofus/Calculateur%20Craft%20Dofus%20TENMA.html)**
+👉 **<a href="https://tenmalexis.github.io/Calculateur-Craft-Dofus/Calculateur%20Craft%20Dofus%20TENMA.html" target="_blank">Ouvrir le Calculateur Craft</a>**
 
 ---
 
@@ -65,4 +65,4 @@ Les recettes et images sont récupérées en temps réel via l'**API dofusdude**
 
 Tu veux plus de guides, crafts rentables et outils Dofus ?
 
-👉 **[youtube.com/@Tenmalexis](https://www.youtube.com/@Tenmalexis)**
+👉 **<a href="https://www.youtube.com/@Tenmalexis" target="_blank">youtube.com/@Tenmalexis</a>**
