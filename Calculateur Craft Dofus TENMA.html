@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0069)file:///C:/Users/adtg6/Downloads/Calculateur_Craft_Dofus_TENMA_4.html -->
+<!-- saved from url=(0069)file:///C:/Users/adtg6/Downloads/Calculateur_Craft_Dofus_TENMA_6.html -->
 <html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -196,7 +196,7 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
         <input type="file" accept=".json" style="display:none" onchange="importSaves(this)">
       </label>
     </div>
-    <div class="saves-list" id="saves-list" style="padding:0 18px 14px"><div class="save-item"><span class="si-name">Disque de Culbutœuf</span><span class="si-date">22/03/2026</span><span class="si-profit pos">+1 091 000 k (+19.6%)</span><button class="si-load" onclick="loadSave(1774208638486)">Charger</button><button class="si-del" onclick="deleteSave(1774208638486)">×</button></div><div class="save-item"><span class="si-name">Arc de Culbutœuf</span><span class="si-date">22/03/2026</span><span class="si-profit pos">+1 497 200 k (+29.0%)</span><button class="si-load" onclick="loadSave(1774209008653)">Charger</button><button class="si-del" onclick="deleteSave(1774209008653)">×</button></div><div class="save-item"><span class="si-name">Cape de Glourdorak</span><span class="si-date">22/03/2026</span><span class="si-profit pos">+1 447 000 k (+20.2%)</span><button class="si-load" onclick="loadSave(1774209212710)">Charger</button><button class="si-del" onclick="deleteSave(1774209212710)">×</button></div></div>
+    <div class="saves-list" id="saves-list" style="padding:0 18px 14px"><div class="save-item"><span class="si-name">Masse de Glourdorak</span><span class="si-date">22/03/2026</span><span class="si-profit pos">+0 k</span><button class="si-load" onclick="loadSave(1774209868941)">Charger</button><button class="si-del" onclick="deleteSave(1774209868941)">×</button></div><div class="save-item"><span class="si-name">Disque de Culbutœuf</span><span class="si-date">22/03/2026</span><span class="si-profit pos">+1 091 000 k (+19.6%)</span><button class="si-load" onclick="loadSave(1774208638486)">Charger</button><button class="si-del" onclick="deleteSave(1774208638486)">×</button></div><div class="save-item"><span class="si-name">Arc de Culbutœuf</span><span class="si-date">22/03/2026</span><span class="si-profit pos">+1 497 200 k (+29.0%)</span><button class="si-load" onclick="loadSave(1774209008653)">Charger</button><button class="si-del" onclick="deleteSave(1774209008653)">×</button></div><div class="save-item"><span class="si-name">Cape de Glourdorak</span><span class="si-date">22/03/2026</span><span class="si-profit pos">+1 447 000 k (+20.2%)</span><button class="si-load" onclick="loadSave(1774209212710)">Charger</button><button class="si-del" onclick="deleteSave(1774209212710)">×</button></div></div>
   </div>
 
 </div>
@@ -212,8 +212,9 @@ function getRows(){
   return Array.from(document.querySelectorAll('#rows tr')).map(tr=>{
     const txt=tr.querySelector('input[type=text]');
     const nums=tr.querySelectorAll('input[type=number]');
-    if(!txt||!nums[0])return{name:'',qty:0,prix:0};
-    return{name:txt.value,qty:parseFloat(nums[0].value)||0,prix:parseFloat(nums[1]?.value)||0};
+    const imgEl=tr.querySelector('img.res-img');
+    if(!txt||!nums[0])return{name:'',qty:0,prix:0,img:''};
+    return{name:txt.value,qty:parseFloat(nums[0].value)||0,prix:parseFloat(nums[1]?.value)||0,img:imgEl?imgEl.src:''};
   });
 }
 
@@ -315,7 +316,9 @@ function saveData(){
   const profit=net-cout;
   const existing=saves.findIndex(x=>x.name===equipName);
   const hdvV=parseFloat(document.getElementById('hdv-vendeur').value)||0;
-  const save={id:existing>=0?saves[existing].id:Date.now(),name:equipName,rows,hdv,hdvV,taxe,profit,date:new Date().toLocaleDateString('fr-FR')};
+  const equipImg=document.getElementById('equip-img');
+  const equipImgSrc=equipImg.classList.contains('visible')?equipImg.src:'';
+  const save={id:existing>=0?saves[existing].id:Date.now(),name:equipName,equipImg:equipImgSrc,rows,hdv,hdvV,taxe,profit,date:new Date().toLocaleDateString('fr-FR')};
   if(existing>=0){saves[existing]=save;}else{saves.unshift(save);}
   localStorage.setItem('dofus_craft_saves',JSON.stringify(saves));
   renderSaves();
@@ -326,8 +329,12 @@ function loadSave(id){
   const s=saves.find(x=>x.id===id);
   if(!s)return;
   document.getElementById('equip-name').value=s.name;
+  // Restaurer l'image de l'équipement
+  const equipImg=document.getElementById('equip-img');
+  if(s.equipImg){equipImg.src=s.equipImg;equipImg.classList.add('visible');}
+  else{equipImg.classList.remove('visible');}
   document.getElementById('rows').innerHTML='';
-  s.rows.forEach(r=>addRow(r.name,r.qty,r.prix));
+  s.rows.forEach(r=>addRow(r.name,r.qty,r.prix,r.img||''));
   document.getElementById('hdv-marche').value=s.hdv||0;
   document.getElementById('hdv-vendeur').value=s.hdvV||0;
   calc();
