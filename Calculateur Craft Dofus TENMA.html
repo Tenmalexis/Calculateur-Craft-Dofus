@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!-- saved from url=(0064)file:///C:/Users/adtg6/Downloads/Calculateur_Craft_Dofus_54.html -->
-<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script>
+<!-- saved from url=(0093)https://tenmalexis.github.io/Calculateur-Craft-Dofus/Calculateur%20Craft%20Dofus%20TENMA.html -->
+<html lang="fr"><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculateur Craft Dofus</title>
@@ -10,7 +10,7 @@ video.bg{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-i
 body{position:relative;}
 
 body{font-family:Arial,sans-serif;background:#0f0f1a;color:#e0e0e0;min-height:100vh;display:flex;justify-content:center;padding:24px 16px}
-.wrap{width:100%;max-width:700px}
+.wrap{width:100%;max-width:960px}
 .header{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:20px 24px;margin-bottom:16px;border:1px solid #2a2a4a}
 .section{background:#1a1a2e;border:1px solid #2a2a4a;border-radius:12px;margin-bottom:14px;overflow:hidden;width:100%}
 .section-title{padding:10px 18px;font-size:12px;font-weight:bold;color:#fff;letter-spacing:0.06em;text-transform:uppercase}
@@ -93,6 +93,46 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
 .sort-btn:hover{color:#aaa;border-color:#555}
 .sort-btn-active{border-color:#e94560!important;color:#e94560!important;background:#2a1020!important}
 .api-badge{font-size:10px;color:#555;text-align:right;padding:2px 8px 4px;border-top:1px solid #2a2a4a}
+.dossier-btn{padding:5px 10px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #2a2a4a;background:#1e1e35;color:#aaa;font-family:Arial,sans-serif;white-space:nowrap;transition:all 0.15s;display:inline-flex;align-items:center;gap:4px}
+.dossier-btn:hover{border-color:#9b59b6;color:#c39bd3}
+.dossier-btn-active{border-color:#9b59b6!important;color:#c39bd3!important;background:#1a0a2a!important}
+.dossier-btn-all{border-color:#555!important;color:#e0e0e0!important}
+.dossier-btn-all.dossier-btn-active{border-color:#e94560!important;color:#e94560!important;background:#2a1020!important}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1e5c3a;border:1px solid #2ecc71;color:#2ecc71;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:bold;z-index:99999;pointer-events:none;transition:opacity 0.4s}
+
+/* ===== HISTO TABLE ===== */
+.histo-table{width:100%;border-collapse:collapse;table-layout:auto}
+.histo-table th{background:#0d1117;color:#fff;font-size:12px;font-weight:bold;padding:10px 12px;border-bottom:1px solid #2a2a4a;white-space:nowrap}
+.histo-table th.th-left{text-align:left}
+.histo-table th.th-right{text-align:right}
+.histo-table th.th-center{text-align:center;width:44px}
+.histo-table td{padding:10px 12px;border-bottom:1px solid #1e1e35;vertical-align:middle;font-size:13px}
+.histo-table tr:last-child td{border-bottom:none}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  body{padding:12px 8px}
+  .wrap{max-width:100%}
+  .param-val{min-width:unset}
+}
+@media(max-width:700px){
+  .histo-table th.th-cout,
+  .histo-table td.td-cout{display:none}
+  .histo-table th.th-commentaire,
+  .histo-table td.td-commentaire{display:none}
+  .metrics{grid-template-columns:1fr}
+  #histo-stats{grid-template-columns:1fr 1fr!important}
+  .save-item .si-date{display:none}
+}
+@media(max-width:480px){
+  .histo-table th.th-date,
+  .histo-table td.td-date{display:none}
+  .actions{flex-direction:column}
+  .param-row{padding:8px 12px}
+  .section-title{padding:8px 12px}
+  .equip-row{padding:10px 12px}
+  .saves-list{padding:0 12px 12px}
+}
 
 </style>
 </head>
@@ -101,6 +141,15 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
   <source src="C:/Users/adtg6/Desktop/Vidéos 2/TRAILER.mp4" type="video/mp4">
 </video>
 <div class="wrap">
+
+  <!-- Navigation onglets -->
+  <div style="display:flex;gap:0;margin-bottom:0;border-bottom:2px solid #2a2a4a">
+    <button id="tab-btn-calc" onclick="switchTab('calc')" style="flex:1;padding:10px;background:#1a1a2e;border:1px solid #2a2a4a;border-bottom:none;color:#e0e0e0;font-size:13px;font-weight:bold;cursor:pointer;border-radius:8px 8px 0 0;font-family:Arial,sans-serif;transition:all 0.15s">⚒️ Calculateur</button>
+    <button id="tab-btn-histo" onclick="switchTab('histo')" style="flex:1;padding:10px;background:#12122a;border:1px solid #2a2a4a;border-bottom:none;color:#666;font-size:13px;font-weight:bold;cursor:pointer;border-radius:8px 8px 0 0;font-family:Arial,sans-serif;transition:all 0.15s">📊 Historique des ventes</button>
+  </div>
+
+  <!-- Onglet Calculateur -->
+  <div id="tab-calc">
 
   <div class="header">
     <div style="display:flex;align-items:center;gap:16px">
@@ -112,6 +161,11 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
           <svg style="width:16px;height:16px;flex-shrink:0" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.5 6.2s-.2-1.6-1-2.3c-.9-1-1.9-1-2.4-1C17.2 2.7 12 2.7 12 2.7s-5.2 0-8.1.2c-.5.1-1.5.1-2.4 1-.7.7-1 2.3-1 2.3S.3 8 .3 9.8v1.7c0 1.8.2 3.6.2 3.6s.2 1.6 1 2.3c.9 1 2.1.9 2.6 1C5.8 18.6 12 18.6 12 18.6s5.2 0 8.1-.2c.5-.1 1.5-.1 2.4-1 .7-.7 1-2.3 1-2.3s.2-1.8.2-3.6V9.8c0-1.8-.2-3.6-.2-3.6zM9.7 14.3V8.1l6.5 3.1-6.5 3.1z"></path></svg>
           @Tenmalexis
         </a>
+        <div style="margin-top:6px;display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;background:linear-gradient(135deg,#1a0a2a,#2a1a4a);border:1px solid #9b59b6;margin-left:12px">
+          <svg style="width:13px;height:13px;flex-shrink:0" viewBox="0 0 24 24" fill="#9b59b6"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+          <span style="font-size:11px;color:#aaa">Code créateur :</span>
+          <span style="font-size:12px;font-weight:bold;color:#ffffff;letter-spacing:0.04em">Tenma</span>
+        </div>
       </div>
     </div>
   </div>
@@ -119,7 +173,7 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
   <div class="section">
     <div class="section-title s-purple">▸ Équipement</div>
     <div class="equip-row">
-      <img id="equip-img" class="equip-img" src="file:///C:/Users/adtg6/Downloads/Calculateur_Craft_Dofus_54.html" alt="">
+      <img id="equip-img" class="equip-img" src="" alt="">
       <span class="equip-label">Nom :</span>
       <div class="search-wrap">
         <input class="equip-input" type="text" id="equip-name" placeholder="Rechercher un item Dofus... (ex: Cape de Glourdorak)" autocomplete="off" oninput="onSearch(this.value)" onkeydown="onSearchKey(event)">
@@ -132,7 +186,7 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
     <div class="section-title s-red">▸ Ressources nécessaires</div>
     <table>
       <thead><tr><th style="width:5%"></th><th style="width:31%">Ressource</th><th style="width:15%">Qté</th><th style="width:21%">Prix unit. (k)</th><th style="width:20%">Sous-total</th><th style="width:8%"></th></tr></thead>
-      <tbody id="rows"><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="calc()"></td><td><input type="number" value="1" min="0" style="width:56px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="calc()"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="calc()"></td><td><input type="number" value="1" min="0" style="width:56px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="calc()"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="calc()"></td><td><input type="number" value="1" min="0" style="width:56px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="calc()"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="calc()"></td><td><input type="number" value="1" min="0" style="width:56px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="calc()"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="calc()"></td><td><input type="number" value="1" min="0" style="width:56px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="calc()"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="calc()"></td><td><input type="number" value="1" min="0" style="width:56px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="calc()"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="calc()"></td><td><input type="number" value="1" min="0" style="width:56px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="calc()"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="calc()"></td><td><input type="number" value="1" min="0" style="width:56px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="calc()"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr></tbody>
+      <tbody id="rows"><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr></tbody>
       <tfoot>
         <tr class="total-row">
           <td colspan="3" style="text-align:right;padding:9px 12px">Coût total de craft</td>
@@ -157,10 +211,11 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
       <input class="param-input" type="number" id="hdv-vendeur" value="0" min="0" oninput="calc()">
       <span class="param-unit">kamas</span>
       <span class="param-val" style="font-size:11px;color:#f39c12" id="apres-taxe-vendeur">Net : 0 k</span>
+      <button onclick="validerVente()" style="flex-shrink:0;padding:6px 14px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #f39c12;background:#2a1a00;color:#f39c12;font-family:Arial,sans-serif;white-space:nowrap">✅ Valider une vente</button>
     </div>
     <div style="margin:0 18px 12px;padding:10px 14px;background:#12122a;border-radius:8px;border:1px solid #2a2a4a;font-size:11px;color:#666;line-height:1.7">
       <div>📌 <strong style="color:#aaa">Prix net</strong> = ce qui revient réellement en banque après la taxe HDV de <strong style="color:#aaa">2%</strong></div>
-      <div id="explication-diff" style="margin-top:4px;color:#666">💡 Remplis les deux prix pour voir la différence entre marché et ton prix vendeur.</div>
+      <div id="explication-diff" style="margin-top:4px;color:#666">💡 Remplis les deux prix pour voir la différence entre marché et ton prix de vente final.</div>
     </div>
   </div>
 
@@ -195,11 +250,19 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
 
   <div class="section">
     <div class="section-title s-gray">▸ Sauvegardes</div>
-    <div style="display:flex;gap:6px;padding:12px 18px 8px;flex-wrap:wrap">
-      <button id="sort-btn-recent" onclick="setSavesSort('recent')" class="sort-btn sort-btn-active">⬇ Récent</button>
-      <button id="sort-btn-ancien" onclick="setSavesSort('ancien')" class="sort-btn">⬆ Ancien</button>
-      <button id="sort-btn-nom" onclick="setSavesSort('nom')" class="sort-btn">🔤 Nom A→Z</button>
-      <button id="sort-btn-rentabilite" onclick="setSavesSort('rentabilite')" class="sort-btn">📈 Rentabilité</button>
+    <!-- Zone dossiers -->
+    <div style="padding:10px 18px 0;border-bottom:1px solid #2a2a4a">
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px">
+        <span style="font-size:11px;color:#666;white-space:nowrap">📁 Dossiers :</span>
+        <div id="dossiers-tabs" style="display:flex;gap:4px;flex-wrap:wrap;flex:1"></div>
+        <button onclick="openModalNouveauDossier()" style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #4a235a;background:#1a0a2a;color:#9b59b6;font-family:Arial,sans-serif;white-space:nowrap">+ Nouveau dossier</button>
+      </div>
+    </div>
+    <div style="display:flex;gap:6px;padding:10px 18px 8px;flex-wrap:wrap">
+      <button id="sort-btn-recent" onclick="setSavesSort(&#39;recent&#39;)" class="sort-btn sort-btn-active">⬇ Récent</button>
+      <button id="sort-btn-ancien" onclick="setSavesSort(&#39;ancien&#39;)" class="sort-btn">⬆ Ancien</button>
+      <button id="sort-btn-nom" onclick="setSavesSort(&#39;nom&#39;)" class="sort-btn">🔤 Nom A→Z</button>
+      <button id="sort-btn-rentabilite" onclick="setSavesSort(&#39;rentabilite&#39;)" class="sort-btn">📈 Rentabilité</button>
     </div>
     <div style="display:flex;gap:8px;padding:14px 18px 12px">
       <button onclick="exportSaves()" style="flex:1;padding:9px;border-radius:8px;font-size:12px;font-weight:bold;cursor:pointer;border:1px solid #1e5c3a;background:#1e1e35;color:#2ecc71;font-family:Arial,sans-serif">📤 Exporter (.json)</button>
@@ -208,25 +271,73 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
         <input type="file" accept=".json" style="display:none" onchange="importSaves(this)">
       </label>
     </div>
-    <div class="saves-list" id="saves-list" style="padding:0 18px 14px"><p class="no-saves">Aucune sauvegarde pour l'instant.</p></div>
+    <div class="saves-list" id="saves-list" style="padding:0 18px 14px"><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/84775-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Clef des Fers de la Tyrannie</span><span class="si-date">16/04/2026</span><span class="si-profit neg">-23 110 k (-100.0%)</span><button class="si-load" onclick="loadSave(1776290960250)">Charger</button><button class="si-del" onclick="deleteSave(1776290960250)">×</button></div></div>
   </div>
+
+  </div><!-- /tab-calc -->
+
+  <!-- Onglet Historique des ventes -->
+  <div id="tab-histo" style="display:none">
+    <div class="section">
+      <div class="section-title" style="background:#1a4a6a">📊 Historique des ventes</div>
+      <div style="display:flex;gap:8px;padding:12px 18px;flex-wrap:wrap;align-items:center">
+        <span style="font-size:12px;color:#aaa;flex:1">Retrouvez ici toutes vos ventes validées.</span>
+        <button onclick="clearHisto()" style="padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #c0392b;background:#2a1010;color:#e74c3c;font-family:Arial,sans-serif">🗑️ Tout effacer</button>
+      </div>
+      <div id="histo-stats" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 18px 12px"></div>
+      <div style="padding:0 18px 14px">
+        <table class="histo-table">
+          <thead>
+            <tr>
+              <th class="th-left th-date">Date</th>
+              <th class="th-center"></th>
+              <th class="th-left">Item</th>
+              <th class="th-left th-commentaire">Commentaire</th>
+              <th class="th-right">Prix de vente</th>
+              <th class="th-right th-cout">Coût craft</th>
+              <th class="th-right">Rentabilité</th>
+              <th class="th-center"></th>
+            </tr>
+          </thead>
+          <tbody id="histo-rows"></tbody>
+        </table>
+        <div id="histo-empty" style="color:#555;font-size:12px;font-style:italic;padding:12px 0;display:none">Aucune vente enregistrée pour l'instant.</div>
+      </div>
+    </div>
+  </div><!-- /tab-histo -->
 
 </div>
 <script>
+// ========== VARIABLES GLOBALES ==========
 let searchTimer=null;
 let currentSugs=[];
 let activeSugIdx=-1;
 let saves=JSON.parse(localStorage.getItem('dofus_craft_saves')||'[]');
-// Mémoire partagée des prix de ressources (nom normalisé → prix)
 let resourcePrices=JSON.parse(localStorage.getItem('dofus_resource_prices')||'{}');
-let savesSortOrder='recent'; // 'recent' ou 'ancien'
+let savesSortOrder='recent';
+let savesSortDir='desc';
+let dossiers=JSON.parse(localStorage.getItem('dofus_craft_dossiers')||'[]');
+let dossierActif=null;
+let histoVentes=JSON.parse(localStorage.getItem('dofus_histo_ventes')||'[]');
+
+// ========== UTILITAIRES ==========
 function fmt(n){return Math.round(n).toLocaleString('fr-FR')}
 function fmtPct(n){return(n>=0?'+':'')+n.toFixed(1)+'%'}
-
-// Normalise un nom de ressource pour la clé de stockage
 function normalizeResourceName(name){return (name||'').trim().toLowerCase();}
 
-// Sauvegarde le prix d'une ressource dans la mémoire partagée
+function showToast(msg, color='#2ecc71', bg='#1e5c3a', border='#2ecc71'){
+  const old=document.getElementById('toast-notif');
+  if(old)old.remove();
+  const t=document.createElement('div');
+  t.id='toast-notif';
+  t.className='toast';
+  t.style.background=bg;t.style.borderColor=border;t.style.color=color;
+  t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),400);},2200);
+}
+
+// ========== PRIX RESSOURCES ==========
 function saveResourcePrice(name,prix){
   const key=normalizeResourceName(name);
   if(!key||prix<=0)return;
@@ -234,12 +345,9 @@ function saveResourcePrice(name,prix){
   localStorage.setItem('dofus_resource_prices',JSON.stringify(resourcePrices));
 }
 
-// Propagation : met à jour toutes les lignes du tableau ET toutes les sauvegardes ayant la même ressource
 function propagatePrice(name,prix){
   saveResourcePrice(name,prix);
   const key=normalizeResourceName(name);
-
-  // 1. Propager dans les lignes actuelles du tableau
   document.querySelectorAll('#rows tr').forEach(tr=>{
     const txt=tr.querySelector('input[type=text]');
     const nums=tr.querySelectorAll('input[type=number]');
@@ -249,20 +357,14 @@ function propagatePrice(name,prix){
       nums[1].classList.add('res-price-mem');
     }
   });
-
-  // 2. Propager dans toutes les sauvegardes stockées (recalcul profit)
   let savesUpdated=false;
   saves.forEach(s=>{
     if(!s.rows)return;
     let changed=false;
     s.rows.forEach(r=>{
-      if(normalizeResourceName(r.name)===key&&r.prix!==prix){
-        r.prix=prix;
-        changed=true;
-      }
+      if(normalizeResourceName(r.name)===key&&r.prix!==prix){r.prix=prix;changed=true;}
     });
     if(changed){
-      // Recalculer le profit de cette sauvegarde
       const cout=s.rows.reduce((acc,r)=>acc+(r.qty*r.prix),0);
       const TAXE=s.taxe||2;
       const net=(s.hdv||0)*(1-TAXE/100);
@@ -270,15 +372,10 @@ function propagatePrice(name,prix){
       savesUpdated=true;
     }
   });
-  if(savesUpdated){
-    localStorage.setItem('dofus_craft_saves',JSON.stringify(saves));
-    renderSaves();
-  }
-
+  if(savesUpdated){localStorage.setItem('dofus_craft_saves',JSON.stringify(saves));renderSaves();}
   calc();
 }
 
-// Au chargement d'une ligne, applique le prix mémorisé si le prix actuel est 0
 function applyMemorizedPriceToRow(tr){
   const txt=tr.querySelector('input[type=text]');
   const nums=tr.querySelectorAll('input[type=number]');
@@ -290,6 +387,7 @@ function applyMemorizedPriceToRow(tr){
   }
 }
 
+// ========== LIGNES RESSOURCES ==========
 function getRows(){
   return Array.from(document.querySelectorAll('#rows tr')).map(tr=>{
     const txt=tr.querySelector('input[type=text]');
@@ -301,11 +399,7 @@ function getRows(){
 }
 
 function addRow(name='',qty=1,prix=0,img=''){
-  // Si prix=0 et qu'on a un prix mémorisé pour cette ressource, on l'utilise
-  if(prix===0&&name){
-    const key=normalizeResourceName(name);
-    if(resourcePrices[key])prix=resourcePrices[key];
-  }
+  if(prix===0&&name){const key=normalizeResourceName(name);if(resourcePrices[key])prix=resourcePrices[key];}
   const tbody=document.getElementById('rows');
   const tr=document.createElement('tr');
   const imgTag=img?`<img src="${img}" class="res-img" onerror="this.style.display='none'" />`:'<div style="width:28px"></div>';
@@ -318,7 +412,6 @@ function delRow(btn){
   if(document.querySelectorAll('#rows tr').length>1){btn.closest('tr').remove();calc();}
 }
 
-// Appelé quand le nom d'une ressource change : applique le prix mémorisé si dispo
 function onResourceNameChange(input){
   const tr=input.closest('tr');
   if(tr){
@@ -326,30 +419,24 @@ function onResourceNameChange(input){
     if(nums[1]){
       const key=normalizeResourceName(input.value);
       if(key&&resourcePrices[key]&&(parseFloat(nums[1].value)||0)===0){
-        nums[1].value=resourcePrices[key];
-        nums[1].classList.add('res-price-mem');
-      }else if(!key||!resourcePrices[key]){
-        nums[1].classList.remove('res-price-mem');
-      }
+        nums[1].value=resourcePrices[key];nums[1].classList.add('res-price-mem');
+      }else if(!key||!resourcePrices[key]){nums[1].classList.remove('res-price-mem');}
     }
   }
   calc();
 }
 
-// Appelé quand le prix d'une ressource change : propage à toutes les lignes identiques
 function onResourcePriceChange(input){
   const tr=input.closest('tr');
   if(tr){
     const txt=tr.querySelector('input[type=text]');
     const prix=parseFloat(input.value)||0;
-    if(txt&&txt.value.trim()&&prix>0){
-      propagatePrice(txt.value.trim(),prix);
-      return; // propagatePrice appelle calc()
-    }
+    if(txt&&txt.value.trim()&&prix>0){propagatePrice(txt.value.trim(),prix);return;}
   }
   calc();
 }
 
+// ========== CALCUL ==========
 function calc(){
   const rows=getRows();
   let cout=0;
@@ -368,13 +455,10 @@ function calc(){
   const profitV=netV-cout;
   const pctM=cout>0?(profitM/cout*100):null;
   const pctV=cout>0?(profitV/cout*100):null;
-
   document.getElementById('total-cout').textContent=fmt(cout);
   document.getElementById('apres-taxe-marche').textContent='Net : '+fmt(netM)+' k';
   document.getElementById('apres-taxe-vendeur').textContent='Net : '+fmt(netV)+' k';
   document.getElementById('r-cout').textContent=fmt(cout);
-
-  // Marché
   const rpm=document.getElementById('r-profit-marche');
   rpm.textContent=(profitM>=0?'+':'')+fmt(profitM)+' k';
   rpm.style.color=profitM>=0?'#2ecc71':'#e74c3c';
@@ -382,8 +466,6 @@ function calc(){
   const rpmPct=document.getElementById('r-pct-marche');
   if(pctM===null){rpmPct.textContent='—';rpmPct.style.color='#555';}
   else{rpmPct.textContent=fmtPct(pctM);rpmPct.style.color=pctM>=0?'#2ecc71':'#e74c3c';}
-
-  // Vendeur
   const rpv=document.getElementById('r-profit-vendeur');
   rpv.textContent=(profitV>=0?'+':'')+fmt(profitV)+' k';
   rpv.style.color=profitV>=0?'#f39c12':'#e74c3c';
@@ -391,22 +473,14 @@ function calc(){
   const rpvPct=document.getElementById('r-pct-vendeur');
   if(pctV===null){rpvPct.textContent='—';rpvPct.style.color='#555';}
   else{rpvPct.textContent=fmtPct(pctV);rpvPct.style.color=pctV>=0?'#f39c12':'#e74c3c';}
-
-  // Explication différence marché / vendeur
   const diff=hdvV-hdvM;
   const expEl=document.getElementById('explication-diff');
   if(hdvM>0&&hdvV>0){
-    const sign=diff>=0?'+':'-';
-    const color=diff>=0?'#f39c12':'#e74c3c';
     const msg=diff>=0
-      ? `✨ Avec ton FM, tu vends <strong style="color:#f39c12">${fmt(Math.abs(diff))} k de plus</strong> que le marché — soit <strong style="color:#f39c12">${fmt(Math.abs(netV-netM))} k de plus</strong> en banque.`
-      : `⚠ Ton prix de vente final est <strong style="color:#e74c3c">${fmt(Math.abs(diff))} k en dessous</strong> du marché.`;
+      ?`✨ Avec ton FM, tu vends <strong style="color:#f39c12">${fmt(Math.abs(diff))} k de plus</strong> que le marché — soit <strong style="color:#f39c12">${fmt(Math.abs(netV-netM))} k de plus</strong> en banque.`
+      :`⚠ Ton prix de vente final est <strong style="color:#e74c3c">${fmt(Math.abs(diff))} k en dessous</strong> du marché.`;
     expEl.innerHTML=msg;
-  } else {
-    expEl.innerHTML='💡 Remplis les deux prix pour voir la différence entre marché et ton prix de vente final.';
-  }
-
-  // Verdict basé sur le prix marché
+  }else{expEl.innerHTML='💡 Remplis les deux prix pour voir la différence entre marché et ton prix de vente final.';}
   const v=document.getElementById('verdict');
   if(cout===0&&hdvM===0&&hdvV===0){v.textContent='— Entrez vos données —';v.className='verdict v-neutral';}
   else if(profitM>=0){v.textContent='✓  RENTABLE au prix marché';v.className='verdict v-ok';}
@@ -414,15 +488,20 @@ function calc(){
   else{v.textContent='✗  PAS RENTABLE — Craft déconseillé';v.className='verdict v-ko';v.style.background='';v.style.borderColor='';v.style.color='';}
 }
 
+// ========== FORMULAIRE ==========
 function resetForm(){
   document.getElementById('equip-name').value='';
+  const equipImg=document.getElementById('equip-img');
+  equipImg.src='';equipImg.classList.remove('visible');
   document.getElementById('rows').innerHTML='';
   for(let i=0;i<8;i++)addRow();
   document.getElementById('hdv-marche').value=0;
   document.getElementById('hdv-vendeur').value=0;
   calc();
+  document.getElementById('equip-name').focus();
 }
 
+// ========== SAUVEGARDES ==========
 function saveData(){
   const equipName=document.getElementById('equip-name').value.trim();
   if(!equipName){alert('Entre d\'abord le nom de l\'équipement.');document.getElementById('equip-name').focus();return;}
@@ -437,18 +516,19 @@ function saveData(){
   const hdvV=parseFloat(document.getElementById('hdv-vendeur').value)||0;
   const equipImg=document.getElementById('equip-img');
   const equipImgSrc=equipImg.classList.contains('visible')?equipImg.src:'';
-  const save={id:existing>=0?saves[existing].id:Date.now(),name:equipName,equipImg:equipImgSrc,rows,hdv,hdvV,taxe,profit,date:new Date().toLocaleDateString('fr-FR')};
+  const dossierId=existing>=0?saves[existing].dossierId:undefined;
+  const save={id:existing>=0?saves[existing].id:Date.now(),name:equipName,equipImg:equipImgSrc,rows,hdv,hdvV,taxe,profit,date:new Date().toLocaleDateString('fr-FR'),updatedAt:Date.now()};
+  if(dossierId!==undefined)save.dossierId=dossierId;
   if(existing>=0){saves[existing]=save;}else{saves.unshift(save);}
   localStorage.setItem('dofus_craft_saves',JSON.stringify(saves));
   renderSaves();
-  alert('✓ "'+equipName+'" sauvegardé !');
+  showToast('✓ "'+equipName+'" sauvegardé !');
 }
 
 function loadSave(id){
   const s=saves.find(x=>x.id===id);
   if(!s)return;
   document.getElementById('equip-name').value=s.name;
-  // Restaurer l'image de l'équipement
   const equipImg=document.getElementById('equip-img');
   if(s.equipImg){equipImg.src=s.equipImg;equipImg.classList.add('visible');}
   else{equipImg.classList.remove('visible');}
@@ -466,48 +546,125 @@ function deleteSave(id){
   renderSaves();
 }
 
-// savesSortDir : 'asc' ou 'desc' (pour nom et rentabilité)
-let savesSortDir='desc';
-
 function setSavesSort(order){
   if(savesSortOrder===order){
-    // Toggle direction pour nom et rentabilité
     if(order==='nom'||order==='rentabilite') savesSortDir=savesSortDir==='asc'?'desc':'asc';
-  } else {
-    savesSortOrder=order;
-    savesSortDir='desc';
-  }
-  // Mettre à jour les labels et classes actives
+  }else{savesSortOrder=order;savesSortDir='desc';}
   const labels={
-    recent:  '⬇ Récent',
-    ancien:  '⬆ Ancien',
-    nom:     savesSortDir==='asc'?'🔤 Nom A→Z':'🔤 Nom Z→A',
-    rentabilite: savesSortDir==='asc'?'📉 Moins rent.':'📈 Plus rent.'
+    recent:'⬇ Récent',ancien:'⬆ Ancien',
+    nom:savesSortDir==='asc'?'🔤 Nom A→Z':'🔤 Nom Z→A',
+    rentabilite:savesSortDir==='asc'?'📉 Moins rent.':'📈 Plus rent.'
   };
   ['recent','ancien','nom','rentabilite'].forEach(k=>{
     const btn=document.getElementById('sort-btn-'+k);
     if(!btn)return;
-    btn.classList.toggle('sort-btn-active', k===savesSortOrder);
-    if(k==='nom') btn.textContent=labels.nom;
-    if(k==='rentabilite') btn.textContent=labels.rentabilite;
+    btn.classList.toggle('sort-btn-active',k===savesSortOrder);
+    if(k==='nom')btn.textContent=labels.nom;
+    if(k==='rentabilite')btn.textContent=labels.rentabilite;
   });
   renderSaves();
 }
 
+// ========== DOSSIERS ==========
+function saveDossiers(){localStorage.setItem('dofus_craft_dossiers',JSON.stringify(dossiers));}
+
+function renderDossiersTabs(){
+  const el=document.getElementById('dossiers-tabs');
+  if(!el)return;
+  let html=`<button class="dossier-btn dossier-btn-all ${dossierActif===null?'dossier-btn-active':''}" onclick="setDossierActif(null)">📂 Tous</button>`;
+  dossiers.forEach(d=>{
+    const count=saves.filter(s=>s.dossierId===d.id).length;
+    html+=`<button class="dossier-btn ${dossierActif===d.id?'dossier-btn-active':''}" onclick="setDossierActif(${d.id})" title="${d.name}">📁 ${d.name} <span style="font-size:10px;opacity:0.6">${count}</span></button>`;
+  });
+  el.innerHTML=html;
+}
+
+function setDossierActif(id){dossierActif=id;renderDossiersTabs();renderSaves();}
+
+function openModalNouveauDossier(){
+  const old=document.getElementById('modal-dossier');if(old)old.remove();
+  const modal=document.createElement('div');
+  modal.id='modal-dossier';
+  modal.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px';
+  const liste=dossiers.length>0?`<div style="margin-top:14px;border-top:1px solid #2a2a4a;padding-top:12px"><div style="font-size:11px;color:#666;margin-bottom:8px">Dossiers existants :</div>${dossiers.map(d=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0"><span style="font-size:12px;color:#aaa">📁 ${d.name}</span><button onclick="supprimerDossier(${d.id})" style="background:none;border:none;color:#555;cursor:pointer;font-size:13px;padding:0 4px">×</button></div>`).join('')}</div>`:'';
+  modal.innerHTML=`<div style="background:#1a1a2e;border:1px solid #4a235a;border-radius:12px;padding:24px;width:100%;max-width:360px;box-shadow:0 8px 32px rgba(0,0,0,0.8)">
+    <div style="font-size:14px;font-weight:bold;color:#e0e0e0;margin-bottom:12px">📁 Nouveau dossier</div>
+    <input id="modal-dossier-name" type="text" placeholder="Nom du dossier (ex : Almanax Brico)" style="width:100%;background:#0f0f1a;border:1px solid #9b59b6;border-radius:6px;padding:8px 10px;font-size:13px;color:#e0e0e0;font-family:Arial,sans-serif;margin-bottom:14px" autofocus>
+    <div style="display:flex;gap:8px">
+      <button onclick="creerDossier()" style="flex:1;padding:10px;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;border:1px solid #9b59b6;background:#1a0a2a;color:#c39bd3;font-family:Arial,sans-serif">✅ Créer</button>
+      <button onclick="document.getElementById('modal-dossier').remove()" style="padding:10px 16px;border-radius:8px;font-size:13px;cursor:pointer;border:1px solid #333;background:#1e1e35;color:#666;font-family:Arial,sans-serif">Annuler</button>
+    </div>${liste}</div>`;
+  document.body.appendChild(modal);
+  modal.querySelector('#modal-dossier-name').addEventListener('keydown',e=>{
+    if(e.key==='Enter')creerDossier();if(e.key==='Escape')modal.remove();
+  });
+}
+
+function creerDossier(){
+  const name=(document.getElementById('modal-dossier-name')?.value||'').trim();
+  if(!name)return;
+  if(dossiers.find(d=>d.name.toLowerCase()===name.toLowerCase())){showToast('⚠ Ce dossier existe déjà','#f39c12','#2a1a00','#f39c12');return;}
+  dossiers.push({id:Date.now(),name});
+  saveDossiers();
+  document.getElementById('modal-dossier')?.remove();
+  renderDossiersTabs();
+  showToast('📁 Dossier "'+name+'" créé !','#c39bd3','#1a0a2a','#9b59b6');
+}
+
+function supprimerDossier(id){
+  if(!confirm('Supprimer ce dossier ? Les crafts dedans seront déplacés dans "Tous".'))return;
+  dossiers=dossiers.filter(d=>d.id!==id);
+  saves.forEach(s=>{if(s.dossierId===id)delete s.dossierId;});
+  localStorage.setItem('dofus_craft_saves',JSON.stringify(saves));
+  saveDossiers();
+  if(dossierActif===id)dossierActif=null;
+  document.getElementById('modal-dossier')?.remove();
+  renderDossiersTabs();renderSaves();
+}
+
+function deplacerCraft(saveId){
+  const s=saves.find(x=>x.id===saveId);if(!s)return;
+  if(dossiers.length===0){showToast('⚠ Crée d\'abord un dossier !','#f39c12','#2a1a00','#f39c12');return;}
+  const old=document.getElementById('modal-deplacer');if(old)old.remove();
+  const modal=document.createElement('div');
+  modal.id='modal-deplacer';
+  modal.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px';
+  const btns=dossiers.map(d=>`<button onclick="assignerDossier(${saveId},${d.id})" style="width:100%;text-align:left;padding:10px 12px;border-radius:6px;font-size:13px;font-weight:bold;cursor:pointer;border:1px solid ${s.dossierId===d.id?'#9b59b6':'#2a2a4a'};background:${s.dossierId===d.id?'#1a0a2a':'#12122a'};color:${s.dossierId===d.id?'#c39bd3':'#aaa'};font-family:Arial,sans-serif;margin-bottom:6px">📁 ${d.name} ${s.dossierId===d.id?'✓':''}</button>`).join('');
+  modal.innerHTML=`<div style="background:#1a1a2e;border:1px solid #4a235a;border-radius:12px;padding:24px;width:100%;max-width:340px;box-shadow:0 8px 32px rgba(0,0,0,0.8)">
+    <div style="font-size:13px;font-weight:bold;color:#e0e0e0;margin-bottom:4px">📁 Déplacer dans un dossier</div>
+    <div style="font-size:11px;color:#666;margin-bottom:14px">${s.name}</div>
+    ${s.dossierId?`<button onclick="assignerDossier(${saveId},null)" style="width:100%;text-align:left;padding:10px 12px;border-radius:6px;font-size:12px;cursor:pointer;border:1px solid #333;background:#12122a;color:#666;font-family:Arial,sans-serif;margin-bottom:10px">🚫 Retirer du dossier</button>`:''}
+    ${btns}
+    <button onclick="document.getElementById('modal-deplacer').remove()" style="width:100%;padding:8px;border-radius:8px;font-size:12px;cursor:pointer;border:1px solid #333;background:#1e1e35;color:#666;font-family:Arial,sans-serif;margin-top:4px">Annuler</button>
+  </div>`;
+  document.body.appendChild(modal);
+}
+
+function assignerDossier(saveId,dossierId){
+  const s=saves.find(x=>x.id===saveId);if(!s)return;
+  if(dossierId===null)delete s.dossierId;else s.dossierId=dossierId;
+  localStorage.setItem('dofus_craft_saves',JSON.stringify(saves));
+  document.getElementById('modal-deplacer')?.remove();
+  renderDossiersTabs();renderSaves();
+  const dname=dossierId?dossiers.find(d=>d.id===dossierId)?.name:'';
+  showToast(dossierId?`📁 Déplacé dans "${dname}"`:'✓ Retiré du dossier','#c39bd3','#1a0a2a','#9b59b6');
+}
+
+// ========== RENDER SAUVEGARDES (version unique et complète) ==========
 function renderSaves(){
+  renderDossiersTabs();
   const el=document.getElementById('saves-list');
+  if(!el)return;
   if(saves.length===0){el.innerHTML='<p class="no-saves">Aucune sauvegarde pour l\'instant.</p>';return;}
   let sorted=[...saves];
+  if(dossierActif!==null)sorted=sorted.filter(s=>s.dossierId===dossierActif);
   if(savesSortOrder==='recent'){
-    // déjà dans l'ordre de sauvegarde (plus récent en tête)
-  } else if(savesSortOrder==='ancien'){
-    sorted.reverse();
-  } else if(savesSortOrder==='nom'){
-    sorted.sort((a,b)=>{
-      const cmp=a.name.localeCompare(b.name,'fr',{sensitivity:'base'});
-      return savesSortDir==='asc'?cmp:-cmp;
-    });
-  } else if(savesSortOrder==='rentabilite'){
+    sorted.sort((a,b)=>(b.updatedAt||b.id||0)-(a.updatedAt||a.id||0));
+  }else if(savesSortOrder==='ancien'){
+    sorted.sort((a,b)=>(a.updatedAt||a.id||0)-(b.updatedAt||b.id||0));
+  }else if(savesSortOrder==='nom'){
+    sorted.sort((a,b)=>{const cmp=a.name.localeCompare(b.name,'fr',{sensitivity:'base'});return savesSortDir==='asc'?cmp:-cmp;});
+  }else if(savesSortOrder==='rentabilite'){
     sorted.sort((a,b)=>{
       const coutA=a.rows?a.rows.reduce((acc,r)=>acc+(r.qty*r.prix),0):0;
       const coutB=b.rows?b.rows.reduce((acc,r)=>acc+(r.qty*r.prix),0):0;
@@ -516,28 +673,176 @@ function renderSaves(){
       return savesSortDir==='desc'?(pctB-pctA):(pctA-pctB);
     });
   }
+  if(sorted.length===0){el.innerHTML='<p class="no-saves" style="padding:6px 0">Aucun craft dans ce dossier.</p>';return;}
   el.innerHTML=sorted.map(s=>{
     const cout=s.rows?s.rows.reduce((acc,r)=>acc+(r.qty*r.prix),0):0;
     const pct=(cout>0)?((s.profit/cout)*100):null;
     const pctStr=pct!==null?` (${pct>=0?'+':''}${pct.toFixed(1)}%)`:'';
     const imgHtml=s.equipImg?`<img class="si-img" src="${s.equipImg}" onerror="this.style.display='none'" />`:`<div class="si-img-placeholder"></div>`;
-    return `<div class="save-item">${imgHtml}<span class="si-name">${s.name}</span><span class="si-date">${s.date}</span><span class="si-profit ${s.profit>=0?'pos':'neg'}">${s.profit>=0?'+':''}${fmt(s.profit)} k${pctStr}</span><button class="si-load" onclick="loadSave(${s.id})">Charger</button><button class="si-del" onclick="deleteSave(${s.id})">×</button></div>`;
+    const dossierBadge=s.dossierId?(()=>{const d=dossiers.find(x=>x.id===s.dossierId);return d?`<span style="font-size:9px;color:#9b59b6;background:#1a0a2a;border:1px solid #4a235a;border-radius:4px;padding:1px 5px;margin-left:4px">📁 ${d.name}</span>`:''})():'';
+    return `<div class="save-item">${imgHtml}<span class="si-name">${s.name}${dossierBadge}</span><span class="si-date">${s.date}</span><span class="si-profit ${s.profit>=0?'pos':'neg'}">${s.profit>=0?'+':''}${fmt(s.profit)} k${pctStr}</span><button class="si-load" onclick="loadSave(${s.id})" title="Charger">Charger</button><button onclick="deplacerCraft(${s.id})" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color='#9b59b6'" onmouseout="this.style.color='#4a235a'">📁</button><button class="si-del" onclick="deleteSave(${s.id})" title="Supprimer">×</button></div>`;
   }).join('');
 }
 
-resetForm();
-renderSaves();
+// ========== EXPORT / IMPORT ==========
+function exportSaves(){
+  const backup={version:2,exportedAt:new Date().toISOString(),saves,dossiers,histoVentes,resourcePrices};
+  if(saves.length===0&&histoVentes.length===0){showToast('⚠ Aucune donnée à exporter','#f39c12','#2a1a00','#f39c12');return;}
+  const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='dofus_tenma_backup_'+new Date().toLocaleDateString('fr-FR').replace(/\//g,'-')+'.json';
+  a.click();URL.revokeObjectURL(a.href);
+  showToast(`📤 Exporté : ${saves.length} craft(s), ${histoVentes.length} vente(s), ${dossiers.length} dossier(s)`);
+}
 
+function importSaves(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const data=JSON.parse(e.target.result);
+      if(data&&data.version===2&&!Array.isArray(data)){
+        if(Array.isArray(data.saves)){data.saves.forEach(s=>{const ex=saves.findIndex(x=>x.id===s.id||x.name===s.name);if(ex>=0){saves[ex]=s;}else{saves.unshift(s);}});localStorage.setItem('dofus_craft_saves',JSON.stringify(saves));}
+        if(Array.isArray(data.dossiers)){data.dossiers.forEach(d=>{if(!dossiers.find(x=>x.id===d.id))dossiers.push(d);});saveDossiers();}
+        if(Array.isArray(data.histoVentes)){data.histoVentes.forEach(h=>{if(!histoVentes.find(x=>x.id===h.id))histoVentes.unshift(h);});localStorage.setItem('dofus_histo_ventes',JSON.stringify(histoVentes));}
+        if(data.resourcePrices&&typeof data.resourcePrices==='object'){Object.assign(resourcePrices,data.resourcePrices);localStorage.setItem('dofus_resource_prices',JSON.stringify(resourcePrices));}
+        renderSaves();
+        showToast(`✅ Importé : ${data.saves?.length||0} craft(s), ${data.histoVentes?.length||0} vente(s), ${data.dossiers?.length||0} dossier(s)`);
+      }else if(Array.isArray(data)){
+        data.forEach(s=>{const ex=saves.findIndex(x=>x.name===s.name);if(ex>=0){saves[ex]=s;}else{saves.unshift(s);}});
+        localStorage.setItem('dofus_craft_saves',JSON.stringify(saves));
+        renderSaves();showToast(`✅ ${data.length} craft(s) importé(s) (format ancien)`);
+      }else{showToast('⚠ Fichier invalide','#e74c3c','#2a1010','#c0392b');}
+    }catch(err){showToast('⚠ Erreur de lecture du fichier','#e74c3c','#2a1010','#c0392b');}
+    input.value='';
+  };
+  reader.readAsText(file);
+}
 
+// ========== ONGLETS ==========
+function switchTab(tab){
+  document.getElementById('tab-calc').style.display=tab==='calc'?'block':'none';
+  document.getElementById('tab-histo').style.display=tab==='histo'?'block':'none';
+  const btnCalc=document.getElementById('tab-btn-calc');
+  const btnHisto=document.getElementById('tab-btn-histo');
+  btnCalc.style.background=tab==='calc'?'#1a1a2e':'#12122a';
+  btnCalc.style.color=tab==='calc'?'#e0e0e0':'#666';
+  btnCalc.style.borderBottom=tab==='calc'?'2px solid #1a1a2e':'none';
+  btnHisto.style.background=tab==='histo'?'#1a1a2e':'#12122a';
+  btnHisto.style.color=tab==='histo'?'#e0e0e0':'#666';
+  btnHisto.style.borderBottom=tab==='histo'?'2px solid #1a1a2e':'none';
+  if(tab==='histo')renderHisto();
+}
+
+// ========== HISTORIQUE DES VENTES ==========
+function validerVente(){
+  const equipName=document.getElementById('equip-name').value.trim();
+  if(!equipName){alert('Entre d\'abord le nom de l\'équipement.');document.getElementById('equip-name').focus();return;}
+  const hdvV=parseFloat(document.getElementById('hdv-vendeur').value)||0;
+  if(hdvV<=0){alert('Entre le prix de vente final avant de valider.');return;}
+  openModalVente(equipName,hdvV);
+}
+
+function openModalVente(equipName,hdvV){
+  const old=document.getElementById('modal-vente');if(old)old.remove();
+  const modal=document.createElement('div');
+  modal.id='modal-vente';
+  modal.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px';
+  modal.innerHTML=`<div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:12px;padding:24px;width:100%;max-width:420px;box-shadow:0 8px 32px rgba(0,0,0,0.8)">
+    <div style="font-size:14px;font-weight:bold;color:#e0e0e0;margin-bottom:4px">✅ Valider une vente</div>
+    <div style="font-size:12px;color:#666;margin-bottom:16px">${equipName} — ${Math.round(hdvV).toLocaleString('fr-FR')} k</div>
+    <label style="font-size:12px;color:#aaa;display:block;margin-bottom:6px">Commentaire <span style="color:#555">(optionnel — ex : rune chasse sur massier)</span></label>
+    <input id="modal-commentaire" type="text" placeholder="ex : +Vitalité 30, vendu via HDV..." style="width:100%;background:#0f0f1a;border:1px solid #333;border-radius:6px;padding:8px 10px;font-size:13px;color:#e0e0e0;font-family:Arial,sans-serif;margin-bottom:16px" autofocus>
+    <div style="display:flex;gap:8px">
+      <button onclick="confirmerVente('${equipName.replace(/'/g,"\\'").replace(/\\/g,'\\\\').replace(/"/g,'&quot;')}',${hdvV})" style="flex:1;padding:10px;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;border:1px solid #f39c12;background:#2a1a00;color:#f39c12;font-family:Arial,sans-serif">✅ Confirmer</button>
+      <button onclick="document.getElementById('modal-vente').remove()" style="padding:10px 16px;border-radius:8px;font-size:13px;cursor:pointer;border:1px solid #333;background:#1e1e35;color:#666;font-family:Arial,sans-serif">Annuler</button>
+    </div></div>`;
+  document.body.appendChild(modal);
+  modal.querySelector('#modal-commentaire').addEventListener('keydown',e=>{
+    if(e.key==='Enter')confirmerVente(equipName,hdvV);
+    if(e.key==='Escape')modal.remove();
+  });
+}
+
+function confirmerVente(equipName,hdvV){
+  const commentaire=(document.getElementById('modal-commentaire')?.value||'').trim();
+  document.getElementById('modal-vente')?.remove();
+  const rows=getRows().filter(r=>r.name||r.prix>0);
+  const cout=rows.reduce((s,r)=>s+r.qty*r.prix,0);
+  const TAXE=0.02;
+  const net=hdvV*(1-TAXE);
+  const profit=net-cout;
+  const pct=cout>0?(profit/cout*100):null;
+  const equipImgEl=document.getElementById('equip-img');
+  const equipImgSrc=equipImgEl.classList.contains('visible')?equipImgEl.src:'';
+  const entry={id:Date.now(),date:new Date().toLocaleDateString('fr-FR'),ts:Date.now(),name:equipName,equipImg:equipImgSrc,commentaire,prixVente:hdvV,cout,profit,pct};
+  histoVentes.unshift(entry);
+  localStorage.setItem('dofus_histo_ventes',JSON.stringify(histoVentes));
+  showToast('✅ Vente de "'+equipName+'" enregistrée !');
+}
+
+function deleteHistoEntry(id){
+  histoVentes=histoVentes.filter(x=>x.id!==id);
+  localStorage.setItem('dofus_histo_ventes',JSON.stringify(histoVentes));
+  renderHisto();
+}
+
+function clearHisto(){
+  if(!confirm('Effacer tout l\'historique des ventes ?'))return;
+  histoVentes=[];
+  localStorage.setItem('dofus_histo_ventes',JSON.stringify(histoVentes));
+  renderHisto();
+}
+
+function renderHisto(){
+  const tbody=document.getElementById('histo-rows');
+  const empty=document.getElementById('histo-empty');
+  const stats=document.getElementById('histo-stats');
+  if(!tbody)return;
+  if(histoVentes.length===0){tbody.innerHTML='';empty.style.display='block';stats.innerHTML='';return;}
+  empty.style.display='none';
+  const totalProfit=histoVentes.reduce((s,e)=>s+e.profit,0);
+  const totalVentes=histoVentes.reduce((s,e)=>s+e.prixVente,0);
+  const pctMoy=histoVentes.filter(e=>e.pct!==null).reduce((s,e,_,a)=>s+e.pct/a.length,0);
+  stats.innerHTML=`
+    <div style="background:#12122a;border:1px solid #2a2a4a;border-radius:8px;padding:10px 12px">
+      <div style="font-size:10px;color:#666;margin-bottom:4px">Ventes totales</div>
+      <div style="font-size:16px;font-weight:bold;color:#e0e0e0">${fmt(totalVentes)} k</div>
+    </div>
+    <div style="background:#12122a;border:1px solid #2a2a4a;border-radius:8px;padding:10px 12px">
+      <div style="font-size:10px;color:#666;margin-bottom:4px">Profit cumulé</div>
+      <div style="font-size:16px;font-weight:bold;color:${totalProfit>=0?'#2ecc71':'#e74c3c'}">${totalProfit>=0?'+':''}${fmt(totalProfit)} k</div>
+    </div>
+    <div style="background:#12122a;border:1px solid #2a2a4a;border-radius:8px;padding:10px 12px">
+      <div style="font-size:10px;color:#666;margin-bottom:4px">Rentabilité moy.</div>
+      <div style="font-size:16px;font-weight:bold;color:${pctMoy>=0?'#2ecc71':'#e74c3c'}">${pctMoy>=0?'+':''}${pctMoy.toFixed(1)}%</div>
+    </div>`;
+  tbody.innerHTML=histoVentes.map(e=>{
+    const pctStr=e.pct!==null?`${e.pct>=0?'+':''}${e.pct.toFixed(1)}%`:'—';
+    const pctColor=e.pct===null?'#555':(e.pct>=0?'#2ecc71':'#e74c3c');
+    const profitColor=e.profit>=0?'#2ecc71':'#e74c3c';
+    const imgHtml=e.equipImg?`<img src="${e.equipImg}" style="width:36px;height:36px;object-fit:contain;border-radius:6px;background:#0f0f1a;border:1px solid #2a2a4a" onerror="this.style.display='none'">`:`<div style="width:36px;height:36px;border-radius:6px;background:#12122a;border:1px solid #2a2a4a"></div>`;
+    const commentHtml=e.commentaire?`<span style="color:#9b59b6;font-style:italic">${e.commentaire}</span>`:`<span style="color:#333">—</span>`;
+    return `<tr style="border-bottom:1px solid #1e1e35">
+      <td class="td-date" style="font-size:13px;white-space:nowrap;color:#aaa">${e.date}</td>
+      <td style="text-align:center;padding:8px 6px">${imgHtml}</td>
+      <td style="font-size:14px;color:#e0e0e0;font-weight:bold">${e.name}</td>
+      <td class="td-commentaire" style="font-size:12px">${commentHtml}</td>
+      <td style="font-size:13px;text-align:right;white-space:nowrap;color:#f39c12">${fmt(e.prixVente)} k</td>
+      <td class="td-cout" style="font-size:13px;text-align:right;white-space:nowrap;color:#aaa">${fmt(e.cout)} k</td>
+      <td style="font-size:13px;text-align:right;white-space:nowrap;font-weight:bold;color:${pctColor}">${pctStr} <span style="color:${profitColor};font-size:12px">(${e.profit>=0?'+':''}${fmt(e.profit)} k)</span></td>
+      <td style="text-align:center;padding:8px 6px"><button class="del-btn" onclick="deleteHistoEntry(${e.id})" style="color:#555;font-size:14px">×</button></td>
+    </tr>`;
+  }).join('');
+}
+
+// ========== RECHERCHE ITEMS ==========
 function onSearch(val){
   clearTimeout(searchTimer);
   const box=document.getElementById('suggestions');
   if(!box)return;
-  if(val.length<3){
-    box.classList.remove('open');
-    box.innerHTML='';
-    return;
-  }
+  if(val.length<3){box.classList.remove('open');box.innerHTML='';return;}
   box.innerHTML='<div style="font-size:13px;color:#aaa;padding:8px 12px;font-style:italic">Recherche...</div>';
   box.classList.add('open');
   searchTimer=setTimeout(()=>fetchItems(val),350);
@@ -551,59 +856,35 @@ async function fetchItems(query){
   try{
     const q=encodeURIComponent(query);
     const base='https://api.dofusdu.de/dofus3/v1/fr/items';
-    // Chercher sur tous les types en parallèle
     const [r1,r2,r3]=await Promise.all([
       fetch(`${base}/equipment/search?query=${q}&limit=5`).then(r=>r.ok?r.json():[]).catch(()=>[]),
       fetch(`${base}/weapons/search?query=${q}&limit=5`).then(r=>r.ok?r.json():[]).catch(()=>[]),
       fetch(`${base}/resources/search?query=${q}&limit=3`).then(r=>r.ok?r.json():[]).catch(()=>[])
     ]);
     const all=[...(Array.isArray(r1)?r1:[]),...(Array.isArray(r2)?r2:[]),...(Array.isArray(r3)?r3:[])];
-    // Dédoublonner par ankama_id
     const seen=new Set();
     currentSugs=all.filter(x=>{if(seen.has(x.ankama_id))return false;seen.add(x.ankama_id);return true;});
     activeSugIdx=-1;
     renderSuggestions(currentSugs,box);
   }catch(e){
     box.innerHTML='';
-    const s=document.createElement('div');
-    s.className='search-status';
-    s.style.fontSize='13px';
-    s.style.color='#e0e0e0';
-    s.textContent='Erreur: '+e.message;
-    box.appendChild(s);
+    const s=document.createElement('div');s.className='search-status';s.style.fontSize='13px';s.style.color='#e0e0e0';s.textContent='Erreur: '+e.message;box.appendChild(s);
   }
 }
 
 async function fetchRecipe(itemId){
   try{
-    // dofusdude: GET /dofus3/v1/fr/items/equipment/{id}
     const res=await fetch(`https://api.dofusdu.de/dofus3/v1/fr/items/equipment/${itemId}`);
-    if(res.ok){
-      const item=await res.json();
-      if(item.recipe&&item.recipe.length>0){
-        fillRecipe(item.recipe);
-        return;
-      }
-    }
-    // Essai ressources
+    if(res.ok){const item=await res.json();if(item.recipe&&item.recipe.length>0){fillRecipe(item.recipe);return;}}
     const res2=await fetch(`https://api.dofusdu.de/dofus3/v1/fr/items/resources/${itemId}`);
-    if(res2.ok){
-      const item2=await res2.json();
-      if(item2.recipe&&item2.recipe.length>0){fillRecipe(item2.recipe);return;}
-    }
-    for(let i=0;i<4;i++)addRow();
-    calc();
+    if(res2.ok){const item2=await res2.json();if(item2.recipe&&item2.recipe.length>0){fillRecipe(item2.recipe);return;}}
+    for(let i=0;i<4;i++)addRow();calc();
   }catch(e){for(let i=0;i<4;i++)addRow();calc();}
 }
 
 async function fillRecipe(ingredients){
   document.getElementById('rows').innerHTML='';
-  if(!ingredients||ingredients.length===0){
-    for(let i=0;i<4;i++)addRow();
-    calc();
-    return;
-  }
-  // Récupérer les noms en parallèle via l'API
+  if(!ingredients||ingredients.length===0){for(let i=0;i<4;i++)addRow();calc();return;}
   const rows=await Promise.all(ingredients.map(async ing=>{
     let qty=ing.quantity||ing.qty||1;
     if(ing.item&&ing.item.name){return{name:ing.item.name,qty,img:(ing.item.image_urls&&ing.item.image_urls.icon)||''};}
@@ -614,10 +895,7 @@ async function fillRecipe(ingredients){
       try{
         const endpoints=['resources','consumables','equipment','weapons','quest_items'];
         for(const t of endpoints){
-          try{
-            const r=await fetch(`https://api.dofusdu.de/dofus3/v1/fr/items/${t}/${id}`);
-            if(r.ok){const d=await r.json();if(d&&d.name){return{name:d.name,qty,img:(d.image_urls&&(d.image_urls.icon||d.image_urls.sd))||''};}}
-          }catch(fe){}
+          try{const r=await fetch(`https://api.dofusdu.de/dofus3/v1/fr/items/${t}/${id}`);if(r.ok){const d=await r.json();if(d&&d.name){return{name:d.name,qty,img:(d.image_urls&&(d.image_urls.icon||d.image_urls.sd))||''};}}}catch(fe){}
         }
       }catch(e){}
     }
@@ -631,29 +909,16 @@ async function fillRecipe(ingredients){
 
 function renderSuggestions(items,box){
   box.innerHTML='';
-  if(!items||items.length===0){
-    const el=document.createElement('div');
-    el.className='search-status';
-    el.textContent='Aucun résultat trouvé';
-    box.appendChild(el);
-    return;
-  }
+  if(!items||items.length===0){const el=document.createElement('div');el.className='search-status';el.textContent='Aucun résultat trouvé';box.appendChild(el);return;}
   items.forEach((item,i)=>{
-    const el=document.createElement('div');
-    el.className='sug-item';
+    const el=document.createElement('div');el.className='sug-item';
     const imgSrc=(item.image_urls&&(item.image_urls.icon||item.image_urls.sd))||'';
     const imgTag=imgSrc?`<img src="${imgSrc}" onerror="this.style.display='none'" />`:'<div style="width:28px;flex-shrink:0"></div>';
-    const name=item.name||'?';
-    const lvl=item.level?`Niv.${item.level}`:'';
-    const type=(item.type&&item.type.name)||'';
+    const name=item.name||'?';const lvl=item.level?`Niv.${item.level}`:'';const type=(item.type&&item.type.name)||'';
     el.innerHTML=`${imgTag}<span class="sug-name">${name}</span><span class="sug-type">${type}</span><span class="sug-lvl">${lvl}</span>`;
-    el.onclick=()=>selectItem(item);
-    box.appendChild(el);
+    el.onclick=()=>selectItem(item);box.appendChild(el);
   });
-  const badge=document.createElement('div');
-  badge.className='api-badge';
-  badge.textContent='via dofusdude';
-  box.appendChild(badge);
+  const badge=document.createElement('div');badge.className='api-badge';badge.textContent='via dofusdude';box.appendChild(badge);
 }
 
 function onSearchKey(e){
@@ -674,64 +939,28 @@ function highlightSug(items){
 async function selectItem(item){
   document.getElementById('equip-name').value=item.name||'';
   document.getElementById('suggestions').classList.remove('open');
-  // Afficher l'image de l'équipement
   const equipImg=document.getElementById('equip-img');
   const imgSrc=(item.image_urls&&(item.image_urls.icon||item.image_urls.sd))||'';
-  if(imgSrc){equipImg.src=imgSrc;equipImg.classList.add('visible');}
-  else{equipImg.classList.remove('visible');}
+  if(imgSrc){equipImg.src=imgSrc;equipImg.classList.add('visible');}else{equipImg.classList.remove('visible');}
   document.getElementById('rows').innerHTML='';
   const tbody=document.getElementById('rows');
   const tr=document.createElement('tr');
   tr.innerHTML='<td colspan="5" style="text-align:center;color:#666;padding:12px;font-size:12px">⏳ Chargement du craft...</td>';
   tbody.appendChild(tr);
   const itemId=item.ankama_id||item.id;
-  if(item.recipe&&item.recipe.length>0){
-    document.getElementById('rows').innerHTML='';
-    fillRecipe(item.recipe);
-  } else {
-    await fetchRecipe(itemId);
-  }
+  if(item.recipe&&item.recipe.length>0){document.getElementById('rows').innerHTML='';fillRecipe(item.recipe);}
+  else{await fetchRecipe(itemId);}
 }
 
-// Fermer suggestions si clic ailleurs
 document.addEventListener('click',function(e){
-  if(!e.target.closest('.search-wrap')){
-    const box=document.getElementById('suggestions');
-    if(box)box.classList.remove('open');
-  }
+  if(!e.target.closest('.search-wrap')){const box=document.getElementById('suggestions');if(box)box.classList.remove('open');}
 });
 
-
-function exportSaves(){
-  if(saves.length===0){alert('Aucune sauvegarde à exporter.');return;}
-  const blob=new Blob([JSON.stringify(saves,null,2)],{type:'application/json'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='dofus_crafts_'+new Date().toLocaleDateString('fr-FR').replace(/\//g,'-')+'.json';
-  a.click();
-  URL.revokeObjectURL(a.href);
-}
-function importSaves(input){
-  const file=input.files[0];
-  if(!file)return;
-  const reader=new FileReader();
-  reader.onload=function(e){
-    try{
-      const imported=JSON.parse(e.target.result);
-      if(!Array.isArray(imported)){alert('Fichier invalide.');return;}
-      imported.forEach(s=>{
-        const exists=saves.findIndex(x=>x.name===s.name);
-        if(exists>=0){saves[exists]=s;}else{saves.unshift(s);}
-      });
-      localStorage.setItem('dofus_craft_saves',JSON.stringify(saves));
-      renderSaves();
-      alert('✓ '+imported.length+' craft(s) importé(s) !');
-    }catch(err){alert('Erreur lors de la lecture.');}
-    input.value='';
-  };
-  reader.readAsText(file);
-}
+// ========== INIT ==========
+resetForm();
+renderSaves();
 
 </script>
+
 
 </body></html>
