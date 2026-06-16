@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!-- saved from url=(0093)https://tenmalexis.github.io/Calculateur-Craft-Dofus/Calculateur%20Craft%20Dofus%20TENMA.html -->
-<html lang="fr"><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script>
+<!-- saved from url=(0053)https://tenmalexis.github.io/Calculateur-Craft-Dofus/ -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculateur Craft Dofus</title>
@@ -145,6 +145,7 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
   <!-- Navigation onglets -->
   <div style="display:flex;gap:0;margin-bottom:0;border-bottom:2px solid #2a2a4a">
     <button id="tab-btn-calc" onclick="switchTab('calc')" style="flex:1;padding:10px;background:#1a1a2e;border:1px solid #2a2a4a;border-bottom:none;color:#e0e0e0;font-size:13px;font-weight:bold;cursor:pointer;border-radius:8px 8px 0 0;font-family:Arial,sans-serif;transition:all 0.15s">⚒️ Calculateur</button>
+    <button id="tab-btn-ventes" onclick="switchTab('ventes')" style="flex:1;padding:10px;background:#12122a;border:1px solid #2a2a4a;border-bottom:none;color:#666;font-size:13px;font-weight:bold;cursor:pointer;border-radius:8px 8px 0 0;font-family:Arial,sans-serif;transition:all 0.15s">🏷️ Ventes en cours</button>
     <button id="tab-btn-histo" onclick="switchTab('histo')" style="flex:1;padding:10px;background:#12122a;border:1px solid #2a2a4a;border-bottom:none;color:#666;font-size:13px;font-weight:bold;cursor:pointer;border-radius:8px 8px 0 0;font-family:Arial,sans-serif;transition:all 0.15s">📊 Historique des ventes</button>
   </div>
 
@@ -162,7 +163,7 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
           @Tenmalexis
         </a>
         <div style="margin-top:6px;display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;background:linear-gradient(135deg,#1a0a2a,#2a1a4a);border:1px solid #9b59b6;margin-left:12px">
-          <svg style="width:13px;height:13px;flex-shrink:0" viewBox="0 0 24 24" fill="#9b59b6"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+          <svg style="width:13px;height:13px;flex-shrink:0" viewBox="0 0 24 24" fill="#9b59b6"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"></path></svg>
           <span style="font-size:11px;color:#aaa">Code créateur :</span>
           <span style="font-size:12px;font-weight:bold;color:#ffffff;letter-spacing:0.04em">Tenma</span>
         </div>
@@ -173,7 +174,7 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
   <div class="section">
     <div class="section-title s-purple">▸ Équipement</div>
     <div class="equip-row">
-      <img id="equip-img" class="equip-img" src="" alt="">
+      <img id="equip-img" class="equip-img" src="https://tenmalexis.github.io/Calculateur-Craft-Dofus/" alt="">
       <span class="equip-label">Nom :</span>
       <div class="search-wrap">
         <input class="equip-input" type="text" id="equip-name" placeholder="Rechercher un item Dofus... (ex: Cape de Glourdorak)" autocomplete="off" oninput="onSearch(this.value)" onkeydown="onSearchKey(event)">
@@ -211,7 +212,7 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
       <input class="param-input" type="number" id="hdv-vendeur" value="0" min="0" oninput="calc()">
       <span class="param-unit">kamas</span>
       <span class="param-val" style="font-size:11px;color:#f39c12" id="apres-taxe-vendeur">Net : 0 k</span>
-      <button onclick="validerVente()" style="flex-shrink:0;padding:6px 14px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #f39c12;background:#2a1a00;color:#f39c12;font-family:Arial,sans-serif;white-space:nowrap">✅ Valider une vente</button>
+      <button onclick="mettreEnVente()" style="flex-shrink:0;padding:6px 14px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #e94560;background:#2a0010;color:#e94560;font-family:Arial,sans-serif;white-space:nowrap">🏷️ Mettre en vente</button>
     </div>
     <div style="margin:0 18px 12px;padding:10px 14px;background:#12122a;border-radius:8px;border:1px solid #2a2a4a;font-size:11px;color:#666;line-height:1.7">
       <div>📌 <strong style="color:#aaa">Prix net</strong> = ce qui revient réellement en banque après la taxe HDV de <strong style="color:#aaa">2%</strong></div>
@@ -254,7 +255,7 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
     <div style="padding:10px 18px 0;border-bottom:1px solid #2a2a4a">
       <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px">
         <span style="font-size:11px;color:#666;white-space:nowrap">📁 Dossiers :</span>
-        <div id="dossiers-tabs" style="display:flex;gap:4px;flex-wrap:wrap;flex:1"></div>
+        <div id="dossiers-tabs" style="display:flex;gap:4px;flex-wrap:wrap;flex:1"><button class="dossier-btn dossier-btn-all dossier-btn-active" onclick="setDossierActif(null)">📂 Tous</button></div>
         <button onclick="openModalNouveauDossier()" style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #4a235a;background:#1a0a2a;color:#9b59b6;font-family:Arial,sans-serif;white-space:nowrap">+ Nouveau dossier</button>
       </div>
     </div>
@@ -271,17 +272,31 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
         <input type="file" accept=".json" style="display:none" onchange="importSaves(this)">
       </label>
     </div>
-    <div class="saves-list" id="saves-list" style="padding:0 18px 14px"><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/84775-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Clef des Fers de la Tyrannie</span><span class="si-date">16/04/2026</span><span class="si-profit neg">-23 110 k (-100.0%)</span><button class="si-load" onclick="loadSave(1776290960250)">Charger</button><button class="si-del" onclick="deleteSave(1776290960250)">×</button></div></div>
+    <div class="saves-list" id="saves-list" style="padding:0 18px 14px"><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/82562-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Pavois frigorifié du Chevalier de Glace</span><span class="si-date">07/05/2026</span><span class="si-profit pos">+0 k</span><button class="si-load" onclick="loadSave(1778157087052)" title="Charger">Charger</button><button onclick="deplacerCraft(1778157087052)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1778157087052)" title="Supprimer">×</button></div></div>
   </div>
 
   </div><!-- /tab-calc -->
 
   <!-- Onglet Historique des ventes -->
+  <div id="tab-ventes" style="display:none">
+    <div class="section">
+      <div class="section-title" style="background:#4a1a30">🏷️ Ventes en cours</div>
+      <div style="display:flex;gap:8px;padding:12px 18px;flex-wrap:wrap;align-items:center">
+        <span style="font-size:12px;color:#aaa;flex:1">Items mis en vente — prix de craft figés au moment de la mise en vente.</span>
+      </div>
+      <div id="ventes-list" style="padding:0 18px 14px">
+        <div id="ventes-empty" style="color:#555;font-size:12px;font-style:italic;padding:12px 0">Aucune vente en cours. Utilisez "Mettre en vente" dans le Calculateur.</div>
+      </div>
+    </div>
+  </div><!-- /tab-ventes -->
+
   <div id="tab-histo" style="display:none">
     <div class="section">
       <div class="section-title" style="background:#1a4a6a">📊 Historique des ventes</div>
       <div style="display:flex;gap:8px;padding:12px 18px;flex-wrap:wrap;align-items:center">
-        <span style="font-size:12px;color:#aaa;flex:1">Retrouvez ici toutes vos ventes validées.</span>
+        <button id="histo-vue-btn" onclick="toggleHistoVue()" style="padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #9b59b6;background:#1a0a2a;color:#c39bd3;font-family:Arial,sans-serif">📦 Vue par item</button>
+        <button id="histo-sort-btn" onclick="toggleHistoSort()" style="padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #2a2a4a;background:#1e1e35;color:#666;font-family:Arial,sans-serif">📈 Trier par renta</button>
+        <span style="font-size:12px;color:#aaa;flex:1"></span>
         <button onclick="clearHisto()" style="padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #c0392b;background:#2a1010;color:#e74c3c;font-family:Arial,sans-serif">🗑️ Tout effacer</button>
       </div>
       <div id="histo-stats" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 18px 12px"></div>
@@ -721,65 +736,127 @@ function importSaves(input){
 }
 
 // ========== ONGLETS ==========
+// ========== ONGLETS & VENTES EN COURS ==========
+let ventesEnCours=JSON.parse(localStorage.getItem('dofus_ventes_en_cours')||'[]');
+let histoSortMode='date';
+let histoVueMode='detail';
+
 function switchTab(tab){
-  document.getElementById('tab-calc').style.display=tab==='calc'?'block':'none';
-  document.getElementById('tab-histo').style.display=tab==='histo'?'block':'none';
-  const btnCalc=document.getElementById('tab-btn-calc');
-  const btnHisto=document.getElementById('tab-btn-histo');
-  btnCalc.style.background=tab==='calc'?'#1a1a2e':'#12122a';
-  btnCalc.style.color=tab==='calc'?'#e0e0e0':'#666';
-  btnCalc.style.borderBottom=tab==='calc'?'2px solid #1a1a2e':'none';
-  btnHisto.style.background=tab==='histo'?'#1a1a2e':'#12122a';
-  btnHisto.style.color=tab==='histo'?'#e0e0e0':'#666';
-  btnHisto.style.borderBottom=tab==='histo'?'2px solid #1a1a2e':'none';
+  ['calc','ventes','histo'].forEach(t=>{
+    const el=document.getElementById('tab-'+t);
+    if(el)el.style.display=t===tab?'block':'none';
+    const btn=document.getElementById('tab-btn-'+t);
+    if(btn){btn.style.background=t===tab?'#1a1a2e':'#12122a';btn.style.color=t===tab?'#e0e0e0':'#666';}
+  });
+  if(tab==='ventes')renderVentes();
   if(tab==='histo')renderHisto();
 }
 
-// ========== HISTORIQUE DES VENTES ==========
-function validerVente(){
+function mettreEnVente(){
   const equipName=document.getElementById('equip-name').value.trim();
-  if(!equipName){alert('Entre d\'abord le nom de l\'équipement.');document.getElementById('equip-name').focus();return;}
+  if(!equipName){alert("Entre d'abord le nom de l'équipement.");document.getElementById('equip-name').focus();return;}
   const hdvV=parseFloat(document.getElementById('hdv-vendeur').value)||0;
-  if(hdvV<=0){alert('Entre le prix de vente final avant de valider.');return;}
-  openModalVente(equipName,hdvV);
-}
-
-function openModalVente(equipName,hdvV){
-  const old=document.getElementById('modal-vente');if(old)old.remove();
-  const modal=document.createElement('div');
-  modal.id='modal-vente';
-  modal.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px';
-  modal.innerHTML=`<div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:12px;padding:24px;width:100%;max-width:420px;box-shadow:0 8px 32px rgba(0,0,0,0.8)">
-    <div style="font-size:14px;font-weight:bold;color:#e0e0e0;margin-bottom:4px">✅ Valider une vente</div>
-    <div style="font-size:12px;color:#666;margin-bottom:16px">${equipName} — ${Math.round(hdvV).toLocaleString('fr-FR')} k</div>
-    <label style="font-size:12px;color:#aaa;display:block;margin-bottom:6px">Commentaire <span style="color:#555">(optionnel — ex : rune chasse sur massier)</span></label>
-    <input id="modal-commentaire" type="text" placeholder="ex : +Vitalité 30, vendu via HDV..." style="width:100%;background:#0f0f1a;border:1px solid #333;border-radius:6px;padding:8px 10px;font-size:13px;color:#e0e0e0;font-family:Arial,sans-serif;margin-bottom:16px" autofocus>
-    <div style="display:flex;gap:8px">
-      <button onclick="confirmerVente('${equipName.replace(/'/g,"\\'").replace(/\\/g,'\\\\').replace(/"/g,'&quot;')}',${hdvV})" style="flex:1;padding:10px;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;border:1px solid #f39c12;background:#2a1a00;color:#f39c12;font-family:Arial,sans-serif">✅ Confirmer</button>
-      <button onclick="document.getElementById('modal-vente').remove()" style="padding:10px 16px;border-radius:8px;font-size:13px;cursor:pointer;border:1px solid #333;background:#1e1e35;color:#666;font-family:Arial,sans-serif">Annuler</button>
-    </div></div>`;
-  document.body.appendChild(modal);
-  modal.querySelector('#modal-commentaire').addEventListener('keydown',e=>{
-    if(e.key==='Enter')confirmerVente(equipName,hdvV);
-    if(e.key==='Escape')modal.remove();
-  });
-}
-
-function confirmerVente(equipName,hdvV){
-  const commentaire=(document.getElementById('modal-commentaire')?.value||'').trim();
-  document.getElementById('modal-vente')?.remove();
+  if(hdvV<=0){alert('Entre le prix de vente final avant de mettre en vente.');return;}
   const rows=getRows().filter(r=>r.name||r.prix>0);
   const cout=rows.reduce((s,r)=>s+r.qty*r.prix,0);
-  const TAXE=0.02;
-  const net=hdvV*(1-TAXE);
-  const profit=net-cout;
-  const pct=cout>0?(profit/cout*100):null;
+  const TAXE=0.02;const net=hdvV*(1-TAXE);const profit=net-cout;const pct=cout>0?(profit/cout*100):null;
   const equipImgEl=document.getElementById('equip-img');
   const equipImgSrc=equipImgEl.classList.contains('visible')?equipImgEl.src:'';
-  const entry={id:Date.now(),date:new Date().toLocaleDateString('fr-FR'),ts:Date.now(),name:equipName,equipImg:equipImgSrc,commentaire,prixVente:hdvV,cout,profit,pct};
-  histoVentes.unshift(entry);
-  localStorage.setItem('dofus_histo_ventes',JSON.stringify(histoVentes));
-  showToast('✅ Vente de "'+equipName+'" enregistrée !');
+  const entry={id:Date.now(),dateDebut:new Date().toLocaleDateString('fr-FR'),ts:Date.now(),name:equipName,equipImg:equipImgSrc,prixVente:hdvV,cout,rows:rows.map(r=>({...r})),profit,pct};
+  ventesEnCours.unshift(entry);
+  localStorage.setItem('dofus_ventes_en_cours',JSON.stringify(ventesEnCours));
+  showToast('\uD83C\uDFF7\uFE0F "'+equipName+'" mis en vente !');
+  switchTab('ventes');
+}
+
+function renderVentes(){
+  const el=document.getElementById('ventes-list');
+  if(!el)return;
+  if(ventesEnCours.length===0){el.innerHTML='<div style="color:#555;font-size:12px;font-style:italic;padding:12px 0">Aucune vente en cours. Utilisez "Mettre en vente" dans le Calculateur.</div>';return;}
+  el.innerHTML=ventesEnCours.map(v=>{
+    const imgHtml=v.equipImg?`<img src="${v.equipImg}" style="width:40px;height:40px;object-fit:contain;border-radius:6px;background:#0f0f1a;border:1px solid #2a2a4a;flex-shrink:0" onerror="this.style.display='none'">`:`<div style="width:40px;height:40px;border-radius:6px;background:#12122a;border:1px solid #2a2a4a;flex-shrink:0"></div>`;
+    const pctStr=v.pct!==null?`${v.pct>=0?'+':''}${v.pct.toFixed(1)}%`:'--';
+    const pctColor=v.pct===null?'#555':(v.pct>=0?'#2ecc71':'#e74c3c');
+    const profitColor=v.profit>=0?'#2ecc71':'#e74c3c';
+    return `<div style="display:flex;align-items:center;gap:10px;padding:12px;background:#12122a;border-radius:8px;margin-bottom:8px;border:1px solid #2a2a4a">
+      ${imgHtml}
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14px;font-weight:bold;color:#e0e0e0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${v.name}</div>
+        <div style="font-size:11px;color:#555;margin-top:2px">Mis en vente le ${v.dateDebut} &middot; Cout craft fige : ${fmt(v.cout)} k</div>
+        <div style="font-size:12px;margin-top:4px">
+          <span style="color:#f39c12">Prix : ${fmt(v.prixVente)} k</span>
+          <span style="color:#555;margin:0 6px">|</span>
+          <span style="color:${profitColor}">Profit : ${v.profit>=0?'+':''}${fmt(v.profit)} k</span>
+          <span style="color:#555;margin:0 6px">|</span>
+          <span style="color:${pctColor}">${pctStr}</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
+        <button onclick="venduClicked(${v.id})" style="padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #2ecc71;background:#0a2a0a;color:#2ecc71;font-family:Arial,sans-serif;white-space:nowrap">OK Vendu!</button>
+        <button onclick="annulerVente(${v.id})" style="padding:4px 8px;border-radius:6px;font-size:10px;cursor:pointer;border:1px solid #333;background:#1e1e35;color:#555;font-family:Arial,sans-serif;white-space:nowrap">Annuler</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function venduClicked(id){
+  const v=ventesEnCours.find(x=>x.id===id);if(!v)return;
+  const old=document.getElementById('modal-vendu');if(old)old.remove();
+  const modal=document.createElement('div');modal.id='modal-vendu';
+  modal.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px';
+  modal.innerHTML=`<div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:12px;padding:24px;width:100%;max-width:440px;box-shadow:0 8px 32px rgba(0,0,0,0.8)">
+    <div style="font-size:14px;font-weight:bold;color:#e0e0e0;margin-bottom:4px">OK Confirmer la vente</div>
+    <div style="font-size:12px;color:#666;margin-bottom:16px">${v.name} &mdash; mis en vente a ${fmt(v.prixVente)} k &middot; cout craft : ${fmt(v.cout)} k</div>
+    <label style="font-size:12px;color:#aaa;display:block;margin-bottom:6px">Prix de vente final <span style="color:#555">(laisser vide = conserver le prix initial)</span></label>
+    <input id="modal-prix-final" type="number" placeholder="${v.prixVente}" value="${v.prixVente}" style="width:100%;background:#0f0f1a;border:1px solid #333;border-radius:6px;padding:8px 10px;font-size:13px;color:#e0e0e0;font-family:Arial,sans-serif;margin-bottom:12px">
+    <label style="font-size:12px;color:#aaa;display:block;margin-bottom:6px">Commentaire <span style="color:#555">(optionnel)</span></label>
+    <input id="modal-commentaire-vendu" type="text" placeholder="ex : vendu en 2 jours..." style="width:100%;background:#0f0f1a;border:1px solid #333;border-radius:6px;padding:8px 10px;font-size:13px;color:#e0e0e0;font-family:Arial,sans-serif;margin-bottom:16px" autofocus>
+    <div style="display:flex;gap:8px">
+      <button onclick="confirmerVendu(${id})" style="flex:1;padding:10px;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;border:1px solid #2ecc71;background:#0a2a0a;color:#2ecc71;font-family:Arial,sans-serif">OK Confirmer</button>
+      <button onclick="document.getElementById('modal-vendu').remove()" style="padding:10px 16px;border-radius:8px;font-size:13px;cursor:pointer;border:1px solid #333;background:#1e1e35;color:#666;font-family:Arial,sans-serif">Annuler</button>
+    </div></div>`;
+  document.body.appendChild(modal);
+  modal.querySelector('#modal-commentaire-vendu').addEventListener('keydown',e=>{if(e.key==='Enter')confirmerVendu(id);if(e.key==='Escape')modal.remove();});
+}
+
+function confirmerVendu(id){
+  const v=ventesEnCours.find(x=>x.id===id);if(!v)return;
+  const prixFinalRaw=parseFloat(document.getElementById('modal-prix-final')?.value);
+  const prixFinal=(!isNaN(prixFinalRaw)&&prixFinalRaw>0)?prixFinalRaw:v.prixVente;
+  const commentaire=(document.getElementById('modal-commentaire-vendu')?.value||'').trim();
+  document.getElementById('modal-vendu')?.remove();
+  const TAXE=0.02;const net=prixFinal*(1-TAXE);const profit=net-v.cout;const pct=v.cout>0?(profit/v.cout*100):null;
+  const entry={id:Date.now(),date:new Date().toLocaleDateString('fr-FR'),ts:Date.now(),name:v.name,equipImg:v.equipImg,commentaire,prixVente:prixFinal,cout:v.cout,profit,pct};
+  histoVentes.unshift(entry);localStorage.setItem('dofus_histo_ventes',JSON.stringify(histoVentes));
+  ventesEnCours=ventesEnCours.filter(x=>x.id!==id);localStorage.setItem('dofus_ventes_en_cours',JSON.stringify(ventesEnCours));
+  showToast('OK Vente de "'+v.name+'" enregistree dans l\'historique !');
+  renderVentes();
+}
+
+function annulerVente(id){
+  if(!confirm('Retirer cet item des ventes en cours ?'))return;
+  ventesEnCours=ventesEnCours.filter(x=>x.id!==id);
+  localStorage.setItem('dofus_ventes_en_cours',JSON.stringify(ventesEnCours));
+  renderVentes();
+}
+
+function toggleHistoVue(){
+  histoVueMode=histoVueMode==='detail'?'cumul':'detail';
+  const btn=document.getElementById('histo-vue-btn');
+  if(btn)btn.textContent=histoVueMode==='cumul'?'Liste detaillee':'Par item (cumul)';
+  renderHisto();
+}
+
+function toggleHistoSort(){
+  histoSortMode=histoSortMode==='date'?'renta':'date';
+  const btn=document.getElementById('histo-sort-btn');
+  if(btn){
+    btn.textContent=histoSortMode==='renta'?'Trier par date':'Trier par renta';
+    btn.style.borderColor=histoSortMode==='renta'?'#e94560':'#2a2a4a';
+    btn.style.color=histoSortMode==='renta'?'#e94560':'#666';
+    btn.style.background=histoSortMode==='renta'?'#2a1020':'#1e1e35';
+  }
+  renderHisto();
 }
 
 function deleteHistoEntry(id){
@@ -789,10 +866,8 @@ function deleteHistoEntry(id){
 }
 
 function clearHisto(){
-  if(!confirm('Effacer tout l\'historique des ventes ?'))return;
-  histoVentes=[];
-  localStorage.setItem('dofus_histo_ventes',JSON.stringify(histoVentes));
-  renderHisto();
+  if(!confirm("Effacer tout l'historique des ventes ?"))return;
+  histoVentes=[];localStorage.setItem('dofus_histo_ventes',JSON.stringify(histoVentes));renderHisto();
 }
 
 function renderHisto(){
@@ -800,41 +875,73 @@ function renderHisto(){
   const empty=document.getElementById('histo-empty');
   const stats=document.getElementById('histo-stats');
   if(!tbody)return;
-  if(histoVentes.length===0){tbody.innerHTML='';empty.style.display='block';stats.innerHTML='';return;}
-  empty.style.display='none';
+  if(histoVentes.length===0){tbody.innerHTML='';if(empty)empty.style.display='block';if(stats)stats.innerHTML='';return;}
+  if(empty)empty.style.display='none';
   const totalProfit=histoVentes.reduce((s,e)=>s+e.profit,0);
   const totalVentes=histoVentes.reduce((s,e)=>s+e.prixVente,0);
-  const pctMoy=histoVentes.filter(e=>e.pct!==null).reduce((s,e,_,a)=>s+e.pct/a.length,0);
-  stats.innerHTML=`
+  const ventesAvecPct=histoVentes.filter(e=>e.pct!==null);
+  const pctMoy=ventesAvecPct.length>0?ventesAvecPct.reduce((s,e)=>s+e.pct,0)/ventesAvecPct.length:0;
+  if(stats)stats.innerHTML=`
     <div style="background:#12122a;border:1px solid #2a2a4a;border-radius:8px;padding:10px 12px">
-      <div style="font-size:10px;color:#666;margin-bottom:4px">Ventes totales</div>
+      <div style="font-size:10px;color:#666;margin-bottom:4px">Ventes totales (${histoVentes.length})</div>
       <div style="font-size:16px;font-weight:bold;color:#e0e0e0">${fmt(totalVentes)} k</div>
     </div>
     <div style="background:#12122a;border:1px solid #2a2a4a;border-radius:8px;padding:10px 12px">
-      <div style="font-size:10px;color:#666;margin-bottom:4px">Profit cumulé</div>
+      <div style="font-size:10px;color:#666;margin-bottom:4px">Profit cumule</div>
       <div style="font-size:16px;font-weight:bold;color:${totalProfit>=0?'#2ecc71':'#e74c3c'}">${totalProfit>=0?'+':''}${fmt(totalProfit)} k</div>
     </div>
     <div style="background:#12122a;border:1px solid #2a2a4a;border-radius:8px;padding:10px 12px">
-      <div style="font-size:10px;color:#666;margin-bottom:4px">Rentabilité moy.</div>
+      <div style="font-size:10px;color:#666;margin-bottom:4px">Rentabilite moy.</div>
       <div style="font-size:16px;font-weight:bold;color:${pctMoy>=0?'#2ecc71':'#e74c3c'}">${pctMoy>=0?'+':''}${pctMoy.toFixed(1)}%</div>
     </div>`;
-  tbody.innerHTML=histoVentes.map(e=>{
-    const pctStr=e.pct!==null?`${e.pct>=0?'+':''}${e.pct.toFixed(1)}%`:'—';
-    const pctColor=e.pct===null?'#555':(e.pct>=0?'#2ecc71':'#e74c3c');
-    const profitColor=e.profit>=0?'#2ecc71':'#e74c3c';
-    const imgHtml=e.equipImg?`<img src="${e.equipImg}" style="width:36px;height:36px;object-fit:contain;border-radius:6px;background:#0f0f1a;border:1px solid #2a2a4a" onerror="this.style.display='none'">`:`<div style="width:36px;height:36px;border-radius:6px;background:#12122a;border:1px solid #2a2a4a"></div>`;
-    const commentHtml=e.commentaire?`<span style="color:#9b59b6;font-style:italic">${e.commentaire}</span>`:`<span style="color:#333">—</span>`;
-    return `<tr style="border-bottom:1px solid #1e1e35">
-      <td class="td-date" style="font-size:13px;white-space:nowrap;color:#aaa">${e.date}</td>
-      <td style="text-align:center;padding:8px 6px">${imgHtml}</td>
-      <td style="font-size:14px;color:#e0e0e0;font-weight:bold">${e.name}</td>
-      <td class="td-commentaire" style="font-size:12px">${commentHtml}</td>
-      <td style="font-size:13px;text-align:right;white-space:nowrap;color:#f39c12">${fmt(e.prixVente)} k</td>
-      <td class="td-cout" style="font-size:13px;text-align:right;white-space:nowrap;color:#aaa">${fmt(e.cout)} k</td>
-      <td style="font-size:13px;text-align:right;white-space:nowrap;font-weight:bold;color:${pctColor}">${pctStr} <span style="color:${profitColor};font-size:12px">(${e.profit>=0?'+':''}${fmt(e.profit)} k)</span></td>
-      <td style="text-align:center;padding:8px 6px"><button class="del-btn" onclick="deleteHistoEntry(${e.id})" style="color:#555;font-size:14px">×</button></td>
-    </tr>`;
-  }).join('');
+  if(histoVueMode==='cumul'){
+    const groupes={};
+    histoVentes.forEach(e=>{
+      const key=e.name.toLowerCase().trim();
+      if(!groupes[key])groupes[key]={name:e.name,equipImg:e.equipImg,count:0,totalVentes:0,totalCout:0,totalProfit:0,pcts:[]};
+      groupes[key].count++;groupes[key].totalVentes+=e.prixVente;groupes[key].totalCout+=e.cout;groupes[key].totalProfit+=e.profit;
+      if(e.pct!==null)groupes[key].pcts.push(e.pct);
+    });
+    let lignes=Object.values(groupes);
+    if(histoSortMode==='renta'){lignes.sort((a,b)=>{const pA=a.pcts.length>0?a.pcts.reduce((s,p)=>s+p,0)/a.pcts.length:-Infinity;const pB=b.pcts.length>0?b.pcts.reduce((s,p)=>s+p,0)/b.pcts.length:-Infinity;return pB-pA;});}
+    tbody.innerHTML=lignes.map(g=>{
+      const pctMoyG=g.pcts.length>0?g.pcts.reduce((s,p)=>s+p,0)/g.pcts.length:null;
+      const pctStr=pctMoyG!==null?`${pctMoyG>=0?'+':''}${pctMoyG.toFixed(1)}%`:'--';
+      const pctColor=pctMoyG===null?'#555':(pctMoyG>=0?'#2ecc71':'#e74c3c');
+      const profitColor=g.totalProfit>=0?'#2ecc71':'#e74c3c';
+      const imgHtml=g.equipImg?`<img src="${g.equipImg}" style="width:36px;height:36px;object-fit:contain;border-radius:6px;background:#0f0f1a;border:1px solid #2a2a4a" onerror="this.style.display='none'">`:`<div style="width:36px;height:36px;border-radius:6px;background:#12122a;border:1px solid #2a2a4a"></div>`;
+      return `<tr style="border-bottom:1px solid #1e1e35">
+        <td class="td-date" style="font-size:13px;white-space:nowrap;color:#9b59b6;font-weight:bold">${g.count}x</td>
+        <td style="text-align:center;padding:8px 6px">${imgHtml}</td>
+        <td style="font-size:14px;color:#e0e0e0;font-weight:bold">${g.name}</td>
+        <td class="td-commentaire" style="font-size:12px;color:#555">--</td>
+        <td style="font-size:13px;text-align:right;white-space:nowrap;color:#f39c12">${fmt(g.totalVentes)} k</td>
+        <td class="td-cout" style="font-size:13px;text-align:right;white-space:nowrap;color:#aaa">${fmt(g.totalCout)} k</td>
+        <td style="font-size:13px;text-align:right;white-space:nowrap;font-weight:bold;color:${pctColor}">${pctStr} <span style="color:${profitColor};font-size:12px">(${g.totalProfit>=0?'+':''}${fmt(g.totalProfit)} k)</span></td>
+        <td style="text-align:center;padding:8px 6px"></td>
+      </tr>`;
+    }).join('');
+  }else{
+    let sorted=[...histoVentes];
+    if(histoSortMode==='renta'){sorted.sort((a,b)=>{const pA=a.pct!==null?a.pct:-Infinity;const pB=b.pct!==null?b.pct:-Infinity;return pB-pA;});}
+    tbody.innerHTML=sorted.map(e=>{
+      const pctStr=e.pct!==null?`${e.pct>=0?'+':''}${e.pct.toFixed(1)}%`:'--';
+      const pctColor=e.pct===null?'#555':(e.pct>=0?'#2ecc71':'#e74c3c');
+      const profitColor=e.profit>=0?'#2ecc71':'#e74c3c';
+      const imgHtml=e.equipImg?`<img src="${e.equipImg}" style="width:36px;height:36px;object-fit:contain;border-radius:6px;background:#0f0f1a;border:1px solid #2a2a4a" onerror="this.style.display='none'">`:`<div style="width:36px;height:36px;border-radius:6px;background:#12122a;border:1px solid #2a2a4a"></div>`;
+      const commentHtml=e.commentaire?`<span style="color:#9b59b6;font-style:italic">${e.commentaire}</span>`:`<span style="color:#333">--</span>`;
+      return `<tr style="border-bottom:1px solid #1e1e35">
+        <td class="td-date" style="font-size:13px;white-space:nowrap;color:#aaa">${e.date}</td>
+        <td style="text-align:center;padding:8px 6px">${imgHtml}</td>
+        <td style="font-size:14px;color:#e0e0e0;font-weight:bold">${e.name}</td>
+        <td class="td-commentaire" style="font-size:12px">${commentHtml}</td>
+        <td style="font-size:13px;text-align:right;white-space:nowrap;color:#f39c12">${fmt(e.prixVente)} k</td>
+        <td class="td-cout" style="font-size:13px;text-align:right;white-space:nowrap;color:#aaa">${fmt(e.cout)} k</td>
+        <td style="font-size:13px;text-align:right;white-space:nowrap;font-weight:bold;color:${pctColor}">${pctStr} <span style="color:${profitColor};font-size:12px">(${e.profit>=0?'+':''}${fmt(e.profit)} k)</span></td>
+        <td style="text-align:center;padding:8px 6px"><button class="del-btn" onclick="deleteHistoEntry(${e.id})" style="color:#555;font-size:14px">x</button></td>
+      </tr>`;
+    }).join('');
+  }
 }
 
 // ========== RECHERCHE ITEMS ==========
@@ -961,6 +1068,7 @@ resetForm();
 renderSaves();
 
 </script>
+
 
 
 </body></html>
