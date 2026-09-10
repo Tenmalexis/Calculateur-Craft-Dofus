@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0053)https://tenmalexis.github.io/Calculateur-Craft-Dofus/ -->
-<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script>
+<html lang="fr"><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculateur Craft Dofus</title>
@@ -134,9 +134,451 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
   .saves-list{padding:0 12px 12px}
 }
 
+
+/* =========================================================
+   TENMALEXIS — DA UNIFIÉE
+   Aucun comportement JS / calcul / sauvegarde / import-export modifié
+   ========================================================= */
+@import url('https://fonts.bunny.net/css?family=rajdhani:500,600,700|dm-sans:400,500,700|exo-2:400,500,600,700');
+
+:root{
+  --ten-bg:#0a0c10;
+  --ten-bg2:#0f1218;
+  --ten-card:#12151c;
+  --ten-card2:#171b24;
+  --ten-border:#20242e;
+  --ten-border2:#2b3140;
+  --ten-gold:#f4b400;
+  --ten-gold-dim:#8a6a10;
+  --ten-text:#e8e9ed;
+  --ten-muted:#8b909c;
+  --ten-red:#ff5c5c;
+  --ten-green:#2ecc71;
+  --ten-blue:#60aef0;
+}
+
+html{scroll-behavior:smooth}
+body{
+  display:block !important;
+  padding:0 !important;
+  margin:0;
+  background:
+    radial-gradient(circle at 16% -12%,rgba(244,180,0,.05),transparent 32%),
+    var(--ten-bg) !important;
+  color:var(--ten-text) !important;
+  font-family:'DM Sans',sans-serif !important;
+}
+video.bg{opacity:.035 !important;filter:saturate(.55) brightness(.55)}
+
+/* ===== HEADER GLOBAL ===== */
+.ten-site-header{
+  position:sticky;
+  top:0;
+  z-index:100000;
+  width:100%;
+  min-height:84px;
+  padding:16px clamp(20px,5vw,56px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+  background:rgba(10,12,16,.95);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--ten-border);
+}
+.ten-brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  min-width:0;
+}
+.ten-brand-logo{
+  width:52px;
+  height:52px;
+  border:1.5px solid var(--ten-gold);
+  border-radius:10px;
+  padding:5px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  flex:0 0 auto;
+  box-shadow:0 0 12px rgba(244,180,0,.10);
+}
+.ten-brand-logo img{width:100%;height:100%;object-fit:contain;display:block}
+.ten-brand-copy{display:flex;flex-direction:column;line-height:1.05}
+.ten-brand-title{
+  font-family:'Rajdhani',sans-serif;
+  font-size:1.55rem;
+  font-weight:700;
+  color:#fff;
+  letter-spacing:.03em;
+}
+.ten-brand-title span{color:var(--ten-gold)}
+.ten-brand-sub{
+  margin-top:5px;
+  font-family:'Exo 2',sans-serif;
+  font-size:.76rem;
+  color:var(--ten-gold);
+}
+
+/* Réseaux — mêmes couleurs que INDEX */
+.ten-social{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.ten-social-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
+  padding:6px 16px 8px;
+  border-radius:14px;
+  transition:background .15s ease,box-shadow .15s ease,transform .15s ease;
+}
+.ten-social-item:hover{transform:translateY(-1px)}
+.ten-social-item .platform-label{
+  font-family:'Exo 2',sans-serif;
+  font-size:.6rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  opacity:.75;
+}
+.ten-social-item a{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:inherit;
+  text-decoration:none;
+  font-family:'Exo 2',sans-serif;
+  font-size:.85rem;
+  font-weight:600;
+}
+.ten-social-item.youtube{
+  color:#ff5c5c;
+  background:rgba(255,59,59,.10);
+  border:1px solid rgba(255,59,59,.45);
+  box-shadow:0 0 12px rgba(255,59,59,.18);
+}
+.ten-social-item.youtube:hover{background:rgba(255,59,59,.16);box-shadow:0 0 16px rgba(255,59,59,.30)}
+.ten-social-item.twitch{
+  color:#b794ff;
+  background:rgba(145,70,255,.12);
+  border:1px solid rgba(145,70,255,.50);
+  box-shadow:0 0 12px rgba(145,70,255,.22);
+}
+.ten-social-item.twitch:hover{background:rgba(145,70,255,.18);box-shadow:0 0 16px rgba(145,70,255,.35)}
+.ten-social-item.ankama{
+  color:var(--ten-gold);
+  background:rgba(244,180,0,.10);
+  border:1px solid rgba(244,180,0,.45);
+  box-shadow:0 0 12px rgba(244,180,0,.18);
+  justify-content:center;
+  padding-top:12px;
+  padding-bottom:12px;
+}
+.ten-social-item.ankama:hover{background:rgba(244,180,0,.16);box-shadow:0 0 16px rgba(244,180,0,.30)}
+.ten-social-item.tiktok{
+  color:#4dedea;
+  background:rgba(37,244,238,.10);
+  border:1px solid rgba(37,244,238,.45);
+  box-shadow:0 0 12px rgba(37,244,238,.18);
+}
+.ten-social-item.tiktok:hover{background:rgba(37,244,238,.16);box-shadow:0 0 16px rgba(37,244,238,.30)}
+
+/* ===== CONTENU ===== */
+.wrap{
+  width:100% !important;
+  max-width:1100px !important;
+  margin:0 auto !important;
+  padding:24px 20px 80px !important;
+}
+
+/* Navigation tabs */
+#tab-btn-calc,#tab-btn-ventes,#tab-btn-histo{
+  font-family:'Rajdhani',sans-serif !important;
+  font-size:14px !important;
+  letter-spacing:.02em;
+  background:#0f1218 !important;
+  border-color:var(--ten-border) !important;
+  color:var(--ten-muted) !important;
+  padding:12px 10px !important;
+}
+#tab-btn-calc:hover,#tab-btn-ventes:hover,#tab-btn-histo:hover{
+  color:var(--ten-text) !important;
+  background:#151922 !important;
+}
+
+/* Header interne du calculateur -> carte titre */
+.header{
+  background:var(--ten-card) !important;
+  border:1px solid var(--ten-border) !important;
+  border-radius:12px !important;
+  box-shadow:0 8px 24px rgba(0,0,0,.12);
+}
+.header h1,.header h2,.header strong{
+  font-family:'Rajdhani',sans-serif !important;
+}
+
+/* Sections */
+.section{
+  background:var(--ten-card) !important;
+  border:1px solid var(--ten-border) !important;
+  border-radius:12px !important;
+  box-shadow:0 8px 22px rgba(0,0,0,.08);
+}
+.section-title{
+  font-family:'Rajdhani',sans-serif !important;
+  background:linear-gradient(135deg,rgba(244,180,0,.16),rgba(244,180,0,.06)) !important;
+  color:var(--ten-gold) !important;
+  border-bottom:1px solid rgba(244,180,0,.22);
+  padding:11px 18px !important;
+  letter-spacing:.08em !important;
+}
+.s-red,.s-green,.s-dark,.s-gray,.s-purple{
+  background:linear-gradient(135deg,rgba(244,180,0,.16),rgba(244,180,0,.06)) !important;
+}
+
+/* Inputs */
+input[type=text],input[type=number],.equip-input{
+  background:#0d1016 !important;
+  border:1px solid var(--ten-border2) !important;
+  color:var(--ten-text) !important;
+  font-family:'DM Sans',sans-serif !important;
+}
+input[type=text]:focus,input[type=number]:focus,.equip-input:focus{
+  outline:none !important;
+  border-color:var(--ten-gold) !important;
+  box-shadow:0 0 0 3px rgba(244,180,0,.08);
+}
+.equip-input{border-color:rgba(244,180,0,.45) !important}
+.equip-img,.res-img{background:#0d1016}
+
+/* Tables */
+th,.histo-table th{
+  background:#0d1016 !important;
+  color:#aeb3bf !important;
+  border-bottom-color:var(--ten-border) !important;
+  font-family:'Rajdhani',sans-serif !important;
+}
+td,.histo-table td{border-bottom-color:#1c212b !important}
+tr:hover td{background:#151a22}
+.total-row td{background:#10141b !important}
+
+/* Paramètres / métriques */
+.param-row{border-bottom-color:var(--ten-border) !important}
+.param-label,.equip-label{color:var(--ten-text) !important}
+.param-unit,.param-val,.subtotal{color:var(--ten-muted) !important}
+.metrics{gap:12px}
+.metric{
+  background:#10141b !important;
+  border:1px solid var(--ten-border) !important;
+  border-radius:10px !important;
+}
+.metric .ml{color:var(--ten-muted) !important}
+.metric .mv{font-family:'Rajdhani',sans-serif;font-size:22px !important}
+
+/* Boutons */
+.btn,.sort-btn,.dossier-btn,.save-item .si-load{
+  font-family:'DM Sans',sans-serif !important;
+  background:#10141b !important;
+  border-color:var(--ten-border2) !important;
+  color:#c5c9d1 !important;
+}
+.btn:hover,.sort-btn:hover,.dossier-btn:hover,.save-item .si-load:hover{
+  border-color:var(--ten-gold) !important;
+  color:var(--ten-gold) !important;
+  background:#151922 !important;
+}
+.btn-save{
+  background:linear-gradient(135deg,#f4b400,#c99400) !important;
+  color:#111 !important;
+  border-color:#f4b400 !important;
+}
+.btn-save:hover{filter:brightness(1.06)}
+.sort-btn-active,.dossier-btn-active,.dossier-btn-all.dossier-btn-active{
+  border-color:var(--ten-gold) !important;
+  color:var(--ten-gold) !important;
+  background:rgba(244,180,0,.09) !important;
+}
+
+/* Sauvegardes */
+.save-item{
+  background:#10141b !important;
+  border:1px solid var(--ten-border) !important;
+  border-radius:9px !important;
+}
+.save-item .si-name{color:var(--ten-text) !important}
+.save-item .si-date,.no-saves{color:var(--ten-muted) !important}
+.save-item .si-img{background:#0d1016 !important;border-color:var(--ten-border) !important}
+
+/* Suggestions API */
+.suggestions{
+  background:#12151c !important;
+  border-color:rgba(244,180,0,.45) !important;
+}
+.sug-item{border-bottom-color:var(--ten-border) !important}
+.sug-item:hover,.sug-item.active{background:rgba(244,180,0,.08) !important}
+.sug-item .sug-name{color:var(--ten-text) !important}
+.sug-item .sug-type{color:var(--ten-gold) !important}
+.res-price-mem{border-color:rgba(244,180,0,.55)!important;background:rgba(244,180,0,.05)!important}
+
+/* Import / export : visibilité renforcée sans toucher aux handlers */
+.ten-backup-bar{
+  display:flex !important;
+  gap:10px !important;
+  padding:14px 18px 12px !important;
+}
+.ten-backup-bar > button,
+.ten-backup-bar > label{
+  border-radius:8px !important;
+  font-family:'DM Sans',sans-serif !important;
+  transition:all .15s ease;
+}
+.ten-backup-bar > button{
+  background:rgba(46,204,113,.09) !important;
+  border:1px solid rgba(46,204,113,.4) !important;
+  color:#45df8a !important;
+  box-shadow:0 0 10px rgba(46,204,113,.08);
+}
+.ten-backup-bar > label{
+  background:rgba(244,180,0,.08) !important;
+  border:1px solid rgba(244,180,0,.4) !important;
+  color:var(--ten-gold) !important;
+  box-shadow:0 0 10px rgba(244,180,0,.08);
+}
+.ten-backup-bar > button:hover{background:rgba(46,204,113,.14) !important}
+.ten-backup-bar > label:hover{background:rgba(244,180,0,.14) !important}
+
+/* Verdicts */
+.v-ok{background:rgba(46,204,113,.08)!important;border-color:rgba(46,204,113,.35)!important}
+.v-ko{background:rgba(231,76,60,.08)!important;border-color:rgba(231,76,60,.35)!important}
+.v-neutral{background:#10141b!important;border-color:var(--ten-border)!important;color:var(--ten-muted)!important}
+
+@media(max-width:1100px){
+  .ten-social{width:100%;justify-content:flex-start}
+}
+@media(max-width:650px){
+  .ten-site-header{padding:12px 14px}
+  .ten-brand-logo{width:44px;height:44px}
+  .ten-brand-title{font-size:1.2rem}
+  .ten-brand-sub{font-size:.68rem}
+  .ten-social{gap:7px}
+  .ten-social-item{padding:6px 10px 7px;border-radius:11px}
+  .ten-social-item.ankama{padding-top:10px;padding-bottom:10px}
+  .ten-social-item a{font-size:.74rem}
+  .ten-social-item .platform-label{font-size:.51rem}
+  .wrap{padding:14px 10px 60px !important}
+}
+
+
+/* ===== IMPORT / EXPORT GLOBAL DANS LE HEADER ===== */
+.ten-header-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-left:auto;
+}
+.ten-header-action{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  min-height:38px;
+  padding:8px 13px;
+  border-radius:10px;
+  font-family:'Exo 2',sans-serif;
+  font-size:.78rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:all .15s ease;
+  white-space:nowrap;
+  text-decoration:none;
+}
+.ten-header-export{
+  background:rgba(46,204,113,.09);
+  border:1px solid rgba(46,204,113,.42);
+  color:#45df8a;
+  box-shadow:0 0 10px rgba(46,204,113,.08);
+}
+.ten-header-export:hover{
+  background:rgba(46,204,113,.15);
+  box-shadow:0 0 14px rgba(46,204,113,.16);
+  transform:translateY(-1px);
+}
+.ten-header-import{
+  background:rgba(244,180,0,.09);
+  border:1px solid rgba(244,180,0,.42);
+  color:var(--ten-gold);
+  box-shadow:0 0 10px rgba(244,180,0,.08);
+}
+.ten-header-import:hover{
+  background:rgba(244,180,0,.15);
+  box-shadow:0 0 14px rgba(244,180,0,.16);
+  transform:translateY(-1px);
+}
+.ten-header-import input{display:none!important}
+
+@media(max-width:1100px){
+  .ten-header-actions{
+    order:3;
+    width:100%;
+    justify-content:flex-start;
+  }
+}
+@media(max-width:650px){
+  .ten-header-action{
+    font-size:.72rem;
+    padding:7px 10px;
+    min-height:34px;
+  }
+}
+
 </style>
 </head>
 <body>
+
+<div class="ten-site-header">
+  <div class="ten-brand">
+    <div class="ten-brand-logo">
+      <img src="https://api.dofusdb.fr/img/items/16349.png" alt="Calculateur Craft Dofus">
+    </div>
+    <div class="ten-brand-copy">
+      <span class="ten-brand-title">Calculateur <span>Craft Dofus</span></span>
+      <span class="ten-brand-sub">L'art de faire des kamas intelligemment</span>
+    </div>
+  </div>
+
+  <div class="ten-header-actions" aria-label="Sauvegarde globale">
+    <button class="ten-header-action ten-header-export" type="button" onclick="exportSaves()" title="Exporter toutes les données de l'outil">
+      📤 Exporter toutes les données
+    </button>
+    <label class="ten-header-action ten-header-import" title="Importer une sauvegarde complète de l'outil">
+      📥 Importer toutes les données
+      <input type="file" accept=".json" onchange="importSaves(this)">
+    </label>
+  </div>
+
+
+  <nav class="ten-social" aria-label="Réseaux Tenmalexis">
+    <div class="ten-social-item ankama">
+      <a href="https://store.ankama.com/fr?code=TENMA" target="_blank" rel="noopener">Code Créateur TENMA</a>
+    </div>
+    <div class="ten-social-item youtube">
+      <span class="platform-label">YouTube</span>
+      <a href="https://www.youtube.com/@Tenmalexis" target="_blank" rel="noopener">▶ @Tenmalexis</a>
+    </div>
+    <div class="ten-social-item twitch">
+      <span class="platform-label">Twitch</span>
+      <a href="https://www.twitch.tv/tenmalexis" target="_blank" rel="noopener">▶ @tenmalexis</a>
+    </div>
+    <div class="ten-social-item tiktok">
+      <span class="platform-label">TikTok</span>
+      <a href="https://www.tiktok.com/@tenmalexis" target="_blank" rel="noopener">♪ @tenmalexis</a>
+    </div>
+  </nav>
+</div>
+
 <video class="bg" autoplay="" loop="" muted="" playsinline="">
   <source src="C:/Users/adtg6/Desktop/Vidéos 2/TRAILER.mp4" type="video/mp4">
 </video>
@@ -144,9 +586,9 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
 
   <!-- Navigation onglets -->
   <div style="display:flex;gap:0;margin-bottom:0;border-bottom:2px solid #2a2a4a">
-    <button id="tab-btn-calc" onclick="switchTab('calc')" style="flex:1;padding:10px;background:#1a1a2e;border:1px solid #2a2a4a;border-bottom:none;color:#e0e0e0;font-size:13px;font-weight:bold;cursor:pointer;border-radius:8px 8px 0 0;font-family:Arial,sans-serif;transition:all 0.15s">⚒️ Calculateur</button>
-    <button id="tab-btn-ventes" onclick="switchTab('ventes')" style="flex:1;padding:10px;background:#12122a;border:1px solid #2a2a4a;border-bottom:none;color:#666;font-size:13px;font-weight:bold;cursor:pointer;border-radius:8px 8px 0 0;font-family:Arial,sans-serif;transition:all 0.15s">🏷️ Ventes en cours</button>
-    <button id="tab-btn-histo" onclick="switchTab('histo')" style="flex:1;padding:10px;background:#12122a;border:1px solid #2a2a4a;border-bottom:none;color:#666;font-size:13px;font-weight:bold;cursor:pointer;border-radius:8px 8px 0 0;font-family:Arial,sans-serif;transition:all 0.15s">📊 Historique des ventes</button>
+    <button id="tab-btn-calc" onclick="switchTab(&#39;calc&#39;)" style="flex:1;padding:10px;background:#1a1a2e;border:1px solid #2a2a4a;border-bottom:none;color:#e0e0e0;font-size:13px;font-weight:bold;cursor:pointer;border-radius:8px 8px 0 0;font-family:Arial,sans-serif;transition:all 0.15s">⚒️ Calculateur</button>
+    <button id="tab-btn-ventes" onclick="switchTab(&#39;ventes&#39;)" style="flex:1;padding:10px;background:#12122a;border:1px solid #2a2a4a;border-bottom:none;color:#666;font-size:13px;font-weight:bold;cursor:pointer;border-radius:8px 8px 0 0;font-family:Arial,sans-serif;transition:all 0.15s">🏷️ Ventes en cours</button>
+    <button id="tab-btn-histo" onclick="switchTab(&#39;histo&#39;)" style="flex:1;padding:10px;background:#12122a;border:1px solid #2a2a4a;border-bottom:none;color:#666;font-size:13px;font-weight:bold;cursor:pointer;border-radius:8px 8px 0 0;font-family:Arial,sans-serif;transition:all 0.15s">📊 Historique des ventes</button>
   </div>
 
   <!-- Onglet Calculateur -->
@@ -255,7 +697,7 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
     <div style="padding:10px 18px 0;border-bottom:1px solid #2a2a4a">
       <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px">
         <span style="font-size:11px;color:#666;white-space:nowrap">📁 Dossiers :</span>
-        <div id="dossiers-tabs" style="display:flex;gap:4px;flex-wrap:wrap;flex:1"><button class="dossier-btn dossier-btn-all dossier-btn-active" onclick="setDossierActif(null)">📂 Tous</button></div>
+        <div id="dossiers-tabs" style="display:flex;gap:4px;flex-wrap:wrap;flex:1"><button class="dossier-btn dossier-btn-all dossier-btn-active" onclick="setDossierActif(null)">📂 Tous</button><button class="dossier-btn " onclick="setDossierActif(1779456364207)" title="Frifri">📁 Frifri <span style="font-size:10px;opacity:0.6">0</span></button></div>
         <button onclick="openModalNouveauDossier()" style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #4a235a;background:#1a0a2a;color:#9b59b6;font-family:Arial,sans-serif;white-space:nowrap">+ Nouveau dossier</button>
       </div>
     </div>
@@ -265,14 +707,14 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
       <button id="sort-btn-nom" onclick="setSavesSort(&#39;nom&#39;)" class="sort-btn">🔤 Nom A→Z</button>
       <button id="sort-btn-rentabilite" onclick="setSavesSort(&#39;rentabilite&#39;)" class="sort-btn">📈 Rentabilité</button>
     </div>
-    <div style="display:flex;gap:8px;padding:14px 18px 12px">
+    <div class="ten-backup-bar" style="display:flex;gap:8px;padding:14px 18px 12px">
       <button onclick="exportSaves()" style="flex:1;padding:9px;border-radius:8px;font-size:12px;font-weight:bold;cursor:pointer;border:1px solid #1e5c3a;background:#1e1e35;color:#2ecc71;font-family:Arial,sans-serif">📤 Exporter (.json)</button>
       <label style="flex:1;padding:9px;border-radius:8px;font-size:12px;font-weight:bold;cursor:pointer;border:1px solid #6b4c00;background:#1e1e35;color:#f39c12;font-family:Arial,sans-serif;text-align:center">
         📥 Importer (.json)
         <input type="file" accept=".json" style="display:none" onchange="importSaves(this)">
       </label>
     </div>
-    <div class="saves-list" id="saves-list" style="padding:0 18px 14px"><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/82562-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Pavois frigorifié du Chevalier de Glace</span><span class="si-date">07/05/2026</span><span class="si-profit pos">+0 k</span><button class="si-load" onclick="loadSave(1778157087052)" title="Charger">Charger</button><button onclick="deplacerCraft(1778157087052)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1778157087052)" title="Supprimer">×</button></div></div>
+    <div class="saves-list" id="saves-list" style="padding:0 18px 14px"><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/77041-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Carte de Culbutœuf</span><span class="si-date">29/06/2026</span><span class="si-profit neg">-3 478 000 k (-100.0%)</span><button class="si-load" onclick="loadSave(1782735996681)" title="Charger">Charger</button><button onclick="deplacerCraft(1782735996681)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1782735996681)" title="Supprimer">×</button></div><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/17271-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Cape au Logis</span><span class="si-date">22/05/2026</span><span class="si-profit pos">+150 208 650 k (+916.4%)</span><button class="si-load" onclick="loadSave(1779454460364)" title="Charger">Charger</button><button onclick="deplacerCraft(1779454460364)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1779454460364)" title="Supprimer">×</button></div><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/84775-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Clef des Fers de la Tyrannie</span><span class="si-date">16/04/2026</span><span class="si-profit neg">-23 110 k (-100.0%)</span><button class="si-load" onclick="loadSave(1776290960250)" title="Charger">Charger</button><button onclick="deplacerCraft(1776290960250)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1776290960250)" title="Supprimer">×</button></div></div>
   </div>
 
   </div><!-- /tab-calc -->
@@ -1068,6 +1510,7 @@ resetForm();
 renderSaves();
 
 </script>
+
 
 
 
