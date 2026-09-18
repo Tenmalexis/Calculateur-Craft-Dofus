@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0053)https://tenmalexis.github.io/Calculateur-Craft-Dofus/ -->
-<html lang="fr"><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script>
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script><script src="chrome-extension://cpmkedoipcpimgecpmgpldfpohjplkpp/gt-window-provider-hedera.js"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculateur Craft Dofus</title>
@@ -89,6 +89,20 @@ input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#e9456
 .sug-item .sug-type{font-size:11px;color:#9b59b6;white-space:nowrap}
 .search-status{font-size:13px;color:#e0e0e0;padding:8px 12px;font-style:italic}
 .res-price-mem{border-color:#9b59b6!important;background:#1a0a2a!important;}
+.price-freshness{display:flex;align-items:center;gap:5px;margin-top:4px;min-height:14px;font-size:10px;line-height:1.2;white-space:nowrap}
+.price-freshness .pf-dot{font-size:8px}
+.price-freshness .pf-label{font-weight:600}
+.price-freshness .pf-refresh{background:none;border:none;padding:0 2px;color:#666;cursor:pointer;font-size:11px;line-height:1;border-radius:3px}
+.price-freshness .pf-refresh:hover{color:var(--ten-gold);background:rgba(244,180,0,.08)}
+.price-freshness.pf-fresh{color:#2ecc71}
+.price-freshness.pf-recent{color:#f1c40f}
+.price-freshness.pf-aging{color:#f39c12}
+.price-freshness.pf-stale,.price-freshness.pf-unknown{color:#e74c3c}
+.freshness-toolbar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#0d1016;border-bottom:1px solid var(--ten-border);flex-wrap:wrap}
+.freshness-toolbar .freshness-help{font-size:10px;color:var(--ten-muted);flex:1;min-width:220px}
+.freshness-filter-btn{padding:5px 9px;border-radius:6px;font-size:10px;font-weight:700;cursor:pointer;border:1px solid var(--ten-border2);background:#10141b;color:#aeb3bf;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.freshness-filter-btn:hover{border-color:var(--ten-gold);color:var(--ten-gold)}
+.freshness-filter-btn.active{border-color:#f39c12;color:#f39c12;background:rgba(243,156,18,.08)}
 .sort-btn{padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #2a2a4a;background:#1e1e35;color:#666;font-family:Arial,sans-serif;white-space:nowrap;transition:all 0.15s}
 .sort-btn:hover{color:#aaa;border-color:#555}
 .sort-btn-active{border-color:#e94560!important;color:#e94560!important;background:#2a1020!important}
@@ -541,7 +555,7 @@ tr:hover td{background:#151a22}
 <div class="ten-site-header">
   <div class="ten-brand">
     <div class="ten-brand-logo">
-      <img src="https://api.dofusdb.fr/img/items/16349.png" alt="Calculateur Craft Dofus">
+      <img src="./Calculateur Craft Dofus_files/16349.png" alt="Calculateur Craft Dofus">
     </div>
     <div class="ten-brand-copy">
       <span class="ten-brand-title">Calculateur <span>Craft Dofus</span></span>
@@ -550,10 +564,10 @@ tr:hover td{background:#151a22}
   </div>
 
   <div class="ten-header-actions" aria-label="Sauvegarde globale">
-    <button class="ten-header-action ten-header-export" type="button" onclick="exportSaves()" title="Exporter toutes les données de l'outil">
+    <button class="ten-header-action ten-header-export" type="button" onclick="exportSaves()" title="Exporter toutes les données de l&#39;outil">
       📤 Exporter toutes les données
     </button>
-    <label class="ten-header-action ten-header-import" title="Importer une sauvegarde complète de l'outil">
+    <label class="ten-header-action ten-header-import" title="Importer une sauvegarde complète de l&#39;outil">
       📥 Importer toutes les données
       <input type="file" accept=".json" onchange="importSaves(this)">
     </label>
@@ -627,6 +641,10 @@ tr:hover td{background:#151a22}
 
   <div class="section">
     <div class="section-title s-red">▸ Ressources nécessaires</div>
+    <div class="freshness-toolbar">
+      <span class="freshness-help">● Fraîcheur des prix : vert ≤ 3 j · jaune ≤ 7 j · orange ≤ 14 j · rouge &gt; 14 j. Le bouton ↻ permet de confirmer qu’un prix inchangé est toujours à jour.</span>
+      <button id="freshness-filter-btn" class="freshness-filter-btn" type="button" onclick="toggleFreshnessFilter()">⏱ À actualiser (&gt; 7 j) <span id="freshness-filter-count"></span></button>
+    </div>
     <table>
       <thead><tr><th style="width:5%"></th><th style="width:31%">Ressource</th><th style="width:15%">Qté</th><th style="width:21%">Prix unit. (k)</th><th style="width:20%">Sous-total</th><th style="width:8%"></th></tr></thead>
       <tbody id="rows"><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><div style="width:28px"></div></td><td><input type="text" placeholder="Nom ressource" value="" oninput="onResourceNameChange(this)"></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr></tbody>
@@ -714,7 +732,7 @@ tr:hover td{background:#151a22}
         <input type="file" accept=".json" style="display:none" onchange="importSaves(this)">
       </label>
     </div>
-    <div class="saves-list" id="saves-list" style="padding:0 18px 14px"><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/77041-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Carte de Culbutœuf</span><span class="si-date">29/06/2026</span><span class="si-profit neg">-3 478 000 k (-100.0%)</span><button class="si-load" onclick="loadSave(1782735996681)" title="Charger">Charger</button><button onclick="deplacerCraft(1782735996681)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1782735996681)" title="Supprimer">×</button></div><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/17271-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Cape au Logis</span><span class="si-date">22/05/2026</span><span class="si-profit pos">+150 208 650 k (+916.4%)</span><button class="si-load" onclick="loadSave(1779454460364)" title="Charger">Charger</button><button onclick="deplacerCraft(1779454460364)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1779454460364)" title="Supprimer">×</button></div><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/84775-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Clef des Fers de la Tyrannie</span><span class="si-date">16/04/2026</span><span class="si-profit neg">-23 110 k (-100.0%)</span><button class="si-load" onclick="loadSave(1776290960250)" title="Charger">Charger</button><button onclick="deplacerCraft(1776290960250)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1776290960250)" title="Supprimer">×</button></div></div>
+    <div class="saves-list" id="saves-list" style="padding:0 18px 14px"><p class="no-saves">Aucune sauvegarde pour l'instant.</p></div>
   </div>
 
   </div><!-- /tab-calc -->
@@ -771,6 +789,7 @@ let currentSugs=[];
 let activeSugIdx=-1;
 let saves=JSON.parse(localStorage.getItem('dofus_craft_saves')||'[]');
 let resourcePrices=JSON.parse(localStorage.getItem('dofus_resource_prices')||'{}');
+let freshnessFilterActive=false;
 let savesSortOrder='recent';
 let savesSortDir='desc';
 let dossiers=JSON.parse(localStorage.getItem('dofus_craft_dossiers')||'[]');
@@ -794,12 +813,141 @@ function showToast(msg, color='#2ecc71', bg='#1e5c3a', border='#2ecc71'){
   setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),400);},2200);
 }
 
-// ========== PRIX RESSOURCES ==========
+// ========== PRIX RESSOURCES + FRAÎCHEUR ==========
+function getResourcePriceEntry(name){
+  const key=normalizeResourceName(name);
+  if(!key)return null;
+  const raw=resourcePrices[key];
+  if(raw===undefined||raw===null)return null;
+
+  // Compatibilité avec les anciennes sauvegardes : auparavant la valeur était un simple nombre.
+  if(typeof raw==='number'||typeof raw==='string'){
+    const price=parseFloat(raw)||0;
+    return price>0?{price,updatedAt:null}:null;
+  }
+  if(typeof raw==='object'){
+    const price=parseFloat(raw.price)||0;
+    const updatedAt=parseInt(raw.updatedAt,10)||null;
+    return price>0?{price,updatedAt}:null;
+  }
+  return null;
+}
+
+function getMemorizedPrice(name){
+  const entry=getResourcePriceEntry(name);
+  return entry?entry.price:0;
+}
+
 function saveResourcePrice(name,prix){
   const key=normalizeResourceName(name);
+  prix=parseFloat(prix)||0;
   if(!key||prix<=0)return;
-  resourcePrices[key]=prix;
+  resourcePrices[key]={price:prix,updatedAt:Date.now()};
   localStorage.setItem('dofus_resource_prices',JSON.stringify(resourcePrices));
+}
+
+function getFreshnessMeta(name,currentPrice=0){
+  const entry=getResourcePriceEntry(name);
+  const hasCurrentPrice=(parseFloat(currentPrice)||0)>0;
+  if(!entry){
+    return hasCurrentPrice
+      ?{label:'Date de MAJ inconnue',cls:'pf-unknown',stale:true,title:'Ce prix existe dans le craft mais n’a pas encore de date de vérification.'}
+      :{label:'Prix non vérifié',cls:'pf-unknown',stale:true,title:'Aucun prix mémorisé pour cette ressource.'};
+  }
+  if(!entry.updatedAt){
+    return {label:'Date de MAJ inconnue',cls:'pf-unknown',stale:true,title:'Ancien prix mémorisé avant l’ajout du suivi des dates. Clique sur ↻ pour le confirmer.'};
+  }
+  const ageMs=Math.max(0,Date.now()-entry.updatedAt);
+  const days=Math.floor(ageMs/86400000);
+  let label=days===0?"MAJ aujourd’hui":days===1?'MAJ il y a 1 j':`MAJ il y a ${days} j`;
+  if(days<=3)return {label,cls:'pf-fresh',stale:false,days,title:new Date(entry.updatedAt).toLocaleString('fr-FR')};
+  if(days<=7)return {label,cls:'pf-recent',stale:false,days,title:new Date(entry.updatedAt).toLocaleString('fr-FR')};
+  if(days<=14)return {label,cls:'pf-aging',stale:true,days,title:new Date(entry.updatedAt).toLocaleString('fr-FR')};
+  return {label,cls:'pf-stale',stale:true,days,title:new Date(entry.updatedAt).toLocaleString('fr-FR')};
+}
+
+function ensureFreshnessUi(tr){
+  const txt=tr.querySelector('input[type=text]');
+  if(!txt)return null;
+  const td=txt.closest('td');
+  if(!td)return null;
+  let box=td.querySelector('.price-freshness');
+  if(!box){
+    box=document.createElement('div');
+    box.className='price-freshness';
+    box.innerHTML='<span class="pf-dot">●</span><span class="pf-label"></span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui">↻</button>';
+    td.appendChild(box);
+  }
+  return box;
+}
+
+function updateFreshnessUi(tr){
+  const txt=tr.querySelector('input[type=text]');
+  const nums=tr.querySelectorAll('input[type=number]');
+  if(!txt)return;
+  const box=ensureFreshnessUi(tr);
+  if(!box)return;
+  const name=txt.value.trim();
+  if(!name){box.style.display='none';return;}
+  box.style.display='flex';
+  const prix=parseFloat(nums[1]?.value)||0;
+  const meta=getFreshnessMeta(name,prix);
+  box.className='price-freshness '+meta.cls;
+  box.querySelector('.pf-label').textContent=meta.label;
+  box.title=meta.title||'';
+  const refreshBtn=box.querySelector('.pf-refresh');
+  if(refreshBtn)refreshBtn.style.display=prix>0?'inline-block':'none';
+}
+
+function updateAllFreshnessUi(){
+  document.querySelectorAll('#rows tr').forEach(updateFreshnessUi);
+  applyFreshnessFilter();
+}
+
+function markResourcePriceFresh(btn){
+  const tr=btn.closest('tr');
+  if(!tr)return;
+  const txt=tr.querySelector('input[type=text]');
+  const nums=tr.querySelectorAll('input[type=number]');
+  const name=(txt?.value||'').trim();
+  const prix=parseFloat(nums[1]?.value)||0;
+  if(!name||prix<=0){showToast('⚠ Renseigne d’abord un prix','#f39c12','#2a1a00','#f39c12');return;}
+  saveResourcePrice(name,prix);
+  const key=normalizeResourceName(name);
+  document.querySelectorAll('#rows tr').forEach(row=>{
+    const rowName=row.querySelector('input[type=text]')?.value||'';
+    if(normalizeResourceName(rowName)===key)updateFreshnessUi(row);
+  });
+  applyFreshnessFilter();
+  showToast('✓ Prix de "'+name+'" vérifié aujourd’hui');
+}
+
+function toggleFreshnessFilter(){
+  freshnessFilterActive=!freshnessFilterActive;
+  applyFreshnessFilter();
+}
+
+function applyFreshnessFilter(){
+  const btn=document.getElementById('freshness-filter-btn');
+  const countEl=document.getElementById('freshness-filter-count');
+  let staleCount=0;
+  document.querySelectorAll('#rows tr').forEach(tr=>{
+    const txt=tr.querySelector('input[type=text]');
+    const nums=tr.querySelectorAll('input[type=number]');
+    if(!txt)return;
+    const name=txt.value.trim();
+    const prix=parseFloat(nums[1]?.value)||0;
+    const meta=name?getFreshnessMeta(name,prix):null;
+    // Le filtre cible les prix jamais datés ou datant de plus de 7 jours.
+    const needsUpdate=!!name&&(!getResourcePriceEntry(name)?.updatedAt || ((Date.now()-getResourcePriceEntry(name).updatedAt)>7*86400000));
+    if(needsUpdate)staleCount++;
+    tr.style.display=(freshnessFilterActive&&!needsUpdate)?'none':'';
+  });
+  if(btn){
+    btn.classList.toggle('active',freshnessFilterActive);
+    btn.firstChild.nodeValue=freshnessFilterActive?'✓ Afficher tout ':'⏱ À actualiser (> 7 j) ';
+  }
+  if(countEl)countEl.textContent=freshnessFilterActive?`(${staleCount})`:staleCount?`(${staleCount})`:'';
 }
 
 function propagatePrice(name,prix){
@@ -837,9 +985,10 @@ function applyMemorizedPriceToRow(tr){
   const txt=tr.querySelector('input[type=text]');
   const nums=tr.querySelectorAll('input[type=number]');
   if(!txt||!nums[1])return;
-  const key=normalizeResourceName(txt.value);
-  if(key&&resourcePrices[key]&&(parseFloat(nums[1].value)||0)===0){
-    nums[1].value=resourcePrices[key];
+  const memPrice=getMemorizedPrice(txt.value);
+  if(memPrice&&(parseFloat(nums[1].value)||0)===0){
+    nums[1].value=memPrice;
+    nums[1].classList.add('res-price-mem');
     calc();
   }
 }
@@ -856,7 +1005,7 @@ function getRows(){
 }
 
 function addRow(name='',qty=1,prix=0,img=''){
-  if(prix===0&&name){const key=normalizeResourceName(name);if(resourcePrices[key])prix=resourcePrices[key];}
+  if(prix===0&&name){const memPrice=getMemorizedPrice(name);if(memPrice)prix=memPrice;}
   const tbody=document.getElementById('rows');
   const tr=document.createElement('tr');
   const imgTag=img?`<img src="${img}" class="res-img" onerror="this.style.display='none'" />`:'<div style="width:28px"></div>';
@@ -875,9 +1024,10 @@ function onResourceNameChange(input){
     const nums=tr.querySelectorAll('input[type=number]');
     if(nums[1]){
       const key=normalizeResourceName(input.value);
-      if(key&&resourcePrices[key]&&(parseFloat(nums[1].value)||0)===0){
-        nums[1].value=resourcePrices[key];nums[1].classList.add('res-price-mem');
-      }else if(!key||!resourcePrices[key]){nums[1].classList.remove('res-price-mem');}
+      const memPrice=getMemorizedPrice(input.value);
+      if(key&&memPrice&&(parseFloat(nums[1].value)||0)===0){
+        nums[1].value=memPrice;nums[1].classList.add('res-price-mem');
+      }else if(!key||!memPrice){nums[1].classList.remove('res-price-mem');}
     }
   }
   calc();
@@ -902,7 +1052,9 @@ function calc(){
     const st=r.qty*r.prix;
     cout+=st;
     const stCell=tr.querySelector('td.subtotal');if(stCell)stCell.textContent=fmt(st);
+    updateFreshnessUi(tr);
   });
+  applyFreshnessFilter();
   const TAXE=0.02;
   const hdvM=parseFloat(document.getElementById('hdv-marche').value)||0;
   const hdvV=parseFloat(document.getElementById('hdv-vendeur').value)||0;
@@ -1143,7 +1295,7 @@ function renderSaves(){
 
 // ========== EXPORT / IMPORT ==========
 function exportSaves(){
-  const backup={version:2,exportedAt:new Date().toISOString(),saves,dossiers,histoVentes,resourcePrices};
+  const backup={version:3,exportedAt:new Date().toISOString(),saves,dossiers,histoVentes,resourcePrices};
   if(saves.length===0&&histoVentes.length===0){showToast('⚠ Aucune donnée à exporter','#f39c12','#2a1a00','#f39c12');return;}
   const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
   const a=document.createElement('a');
@@ -1159,7 +1311,7 @@ function importSaves(input){
   reader.onload=function(e){
     try{
       const data=JSON.parse(e.target.result);
-      if(data&&data.version===2&&!Array.isArray(data)){
+      if(data&&Number(data.version)>=2&&!Array.isArray(data)){
         if(Array.isArray(data.saves)){data.saves.forEach(s=>{const ex=saves.findIndex(x=>x.id===s.id||x.name===s.name);if(ex>=0){saves[ex]=s;}else{saves.unshift(s);}});localStorage.setItem('dofus_craft_saves',JSON.stringify(saves));}
         if(Array.isArray(data.dossiers)){data.dossiers.forEach(d=>{if(!dossiers.find(x=>x.id===d.id))dossiers.push(d);});saveDossiers();}
         if(Array.isArray(data.histoVentes)){data.histoVentes.forEach(h=>{if(!histoVentes.find(x=>x.id===h.id))histoVentes.unshift(h);});localStorage.setItem('dofus_histo_ventes',JSON.stringify(histoVentes));}
@@ -1508,8 +1660,10 @@ document.addEventListener('click',function(e){
 // ========== INIT ==========
 resetForm();
 renderSaves();
+updateAllFreshnessUi();
 
 </script>
+
 
 
 
