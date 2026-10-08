@@ -595,6 +595,28 @@ tr:hover td{background:#151a22}
   .calc-intro-copy p{font-size:11px}
 }
 
+
+/* MAJ octobre 2026 : textes lisibles, volumes et dossiers */
+:root{--ten-muted:#f0f1f4}
+.param-unit,.param-val,.subtotal,.metric .ml,.save-item .si-date,.no-saves,.sug-item .sug-lvl,.freshness-help,.api-badge{color:#f0f1f4!important}
+.section [style*="color:#666"],.section [style*="color: #666"],.section [style*="color:#555"],.section [style*="color:#aaa"]{color:#f0f1f4!important}
+input::placeholder{color:#b9bdc7!important}
+.ten-hint{margin:0 18px 14px;padding:10px 14px;background:#10141b;border:1px solid var(--ten-border2);border-radius:8px;color:#f0f1f4;font-size:12px;line-height:1.6}
+.dossier-tab-wrap{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--ten-border2);border-radius:7px;padding-right:4px}
+.dossier-tab-wrap .dossier-btn{border:none!important}
+.dossier-delete{border:0;background:transparent;color:#fff;cursor:pointer;font-size:19px;line-height:1;padding:3px 7px;border-radius:5px}
+.dossier-delete:hover{background:rgba(255,92,92,.16);color:#ff5c5c}
+/* Ventes 30 jours : champ et indicateur sur une seule ligne */
+.ten-volume-row{flex-wrap:nowrap;gap:10px}
+.ten-volume-row .param-label{flex:0 1 auto;white-space:normal}
+.ten-volume-row .param-input{width:110px;flex:0 0 110px}
+.ten-volume-row .param-unit{min-width:42px}
+.ten-volume-row .param-val{flex:1;min-width:135px;text-align:left;white-space:normal}
+@media(max-width:580px){
+ .ten-volume-row{flex-wrap:wrap}
+ .ten-volume-row .param-label{flex-basis:100%}
+ .ten-volume-row .param-val{flex:1}
+}
 </style>
 </head>
 <body>
@@ -611,10 +633,10 @@ tr:hover td{background:#151a22}
   </div>
 
   <div class="ten-header-actions" aria-label="Sauvegarde globale">
-    <button class="ten-header-action ten-header-export" type="button" onclick="exportSaves()" title="Exporter toutes les données de l&#39;outil">
+    <button class="ten-header-action ten-header-export" type="button" onclick="exportSaves()" title="Exporter toutes les données de l'outil">
       📤 Exporter toutes les données
     </button>
-    <label class="ten-header-action ten-header-import" title="Importer une sauvegarde complète de l&#39;outil">
+    <label class="ten-header-action ten-header-import" title="Importer une sauvegarde complète de l'outil">
       📥 Importer toutes les données
       <input type="file" accept=".json" onchange="importSaves(this)">
     </label>
@@ -647,13 +669,13 @@ tr:hover td{background:#151a22}
 
   <!-- Navigation onglets -->
   <div style="display:flex;gap:0;margin-bottom:0;border-bottom:2px solid #2a2a4a">
-    <button id="tab-btn-calc" onclick="switchTab(&#39;calc&#39;)" style="flex:1;padding:10px;background:#1a1a2e;border:1px solid #2a2a4a;border-bottom:none;color:#e0e0e0;font-size:13px;font-weight:bold;cursor:pointer;border-radius:8px 8px 0 0;font-family:Arial,sans-serif;transition:all 0.15s">⚒️ Calculateur</button>
-    <button id="tab-btn-ventes" onclick="switchTab(&#39;ventes&#39;)" style="flex:1;padding:10px;background:#12122a;border:1px solid #2a2a4a;border-bottom:none;color:#666;font-size:13px;font-weight:bold;cursor:pointer;border-radius:8px 8px 0 0;font-family:Arial,sans-serif;transition:all 0.15s">🏷️ Ventes en cours</button>
-    <button id="tab-btn-histo" onclick="switchTab(&#39;histo&#39;)" style="flex:1;padding:10px;background:#12122a;border:1px solid #2a2a4a;border-bottom:none;color:#666;font-size:13px;font-weight:bold;cursor:pointer;border-radius:8px 8px 0 0;font-family:Arial,sans-serif;transition:all 0.15s">📊 Historique des ventes</button>
+    <button id="tab-btn-calc" onclick="switchTab('calc')" style="flex: 1 1 0%; padding: 10px; background: rgb(26, 26, 46); border-width: 1px 1px medium; border-style: solid solid none; border-color: rgb(42, 42, 74) rgb(42, 42, 74) currentcolor; border-image: none; color: rgb(224, 224, 224); font-size: 13px; font-weight: bold; cursor: pointer; border-radius: 8px 8px 0px 0px; font-family: Arial, sans-serif; transition: 0.15s;">⚒️ Calculateur</button>
+    <button id="tab-btn-ventes" onclick="switchTab('ventes')" style="flex: 1 1 0%; padding: 10px; background: rgb(18, 18, 42); border-width: 1px 1px medium; border-style: solid solid none; border-color: rgb(42, 42, 74) rgb(42, 42, 74) currentcolor; border-image: none; color: rgb(102, 102, 102); font-size: 13px; font-weight: bold; cursor: pointer; border-radius: 8px 8px 0px 0px; font-family: Arial, sans-serif; transition: 0.15s;">🏷️ Ventes en cours</button>
+    <button id="tab-btn-histo" onclick="switchTab('histo')" style="flex: 1 1 0%; padding: 10px; background: rgb(18, 18, 42); border-width: 1px 1px medium; border-style: solid solid none; border-color: rgb(42, 42, 74) rgb(42, 42, 74) currentcolor; border-image: none; color: rgb(102, 102, 102); font-size: 13px; font-weight: bold; cursor: pointer; border-radius: 8px 8px 0px 0px; font-family: Arial, sans-serif; transition: 0.15s;">📊 Historique des ventes</button>
   </div>
 
   <!-- Onglet Calculateur -->
-  <div id="tab-calc">
+  <div id="tab-calc" style="display: block;">
 
   <div class="header calc-intro-header">
     <img class="calc-intro-logo" src="https://api.dofusdb.fr/img/items/16349.png" alt="Calculateur Craft Dofus">
@@ -666,11 +688,11 @@ tr:hover td{background:#151a22}
   <div class="section">
     <div class="section-title s-purple">▸ Équipement</div>
     <div class="equip-row">
-      <img id="equip-img" class="equip-img visible" src="./Calculateur Craft Dofus_files/151093-64.png" alt="">
+      <img id="equip-img" class="equip-img visible" src="./Calculateur Craft Dofus_files/11229-64.png" alt="">
       <span class="equip-label">Nom :</span>
       <div class="search-wrap">
         <input class="equip-input" type="text" id="equip-name" placeholder="Rechercher un item Dofus... (ex: Cape de Glourdorak)" autocomplete="off" oninput="onSearch(this.value)" onkeydown="onSearchKey(event)">
-        <div class="suggestions" id="suggestions" style="left: 563.5px; top: 229.333px; width: 613.833px;"><div class="sug-item"><img src="./Calculateur Craft Dofus_files/9038-64.png" onerror="this.style.display=&#39;none&#39;"><span class="sug-name">Force de Crocoburio</span><span class="sug-type">Anneau</span><span class="sug-lvl">Niv.40</span></div><div class="sug-item"><img src="./Calculateur Craft Dofus_files/151091-64.png" onerror="this.style.display=&#39;none&#39;"><span class="sug-name">Forcené mineur</span><span class="sug-type">Trophée</span><span class="sug-lvl">Niv.50</span></div><div class="sug-item"><img src="./Calculateur Craft Dofus_files/151093-64.png" onerror="this.style.display=&#39;none&#39;"><span class="sug-name">Forcené majeur</span><span class="sug-type">Trophée</span><span class="sug-lvl">Niv.150</span></div><div class="sug-item"><img src="./Calculateur Craft Dofus_files/151092-64.png" onerror="this.style.display=&#39;none&#39;"><span class="sug-name">Forcené</span><span class="sug-type">Trophée</span><span class="sug-lvl">Niv.100</span></div><div class="sug-item"><img src="./Calculateur Craft Dofus_files/10011-64.png" onerror="this.style.display=&#39;none&#39;"><span class="sug-name">Ceinture Forcesque</span><span class="sug-type">Ceinture</span><span class="sug-lvl">Niv.8</span></div><div class="sug-item"><img src="./Calculateur Craft Dofus_files/15571-64.png" onerror="this.style.display=&#39;none&#39;"><span class="sug-name">Bracelet de Force de Trooll</span><span class="sug-type">Ressource diverse</span><span class="sug-lvl">Niv.115</span></div><div class="sug-item"><img src="./Calculateur Craft Dofus_files/47688-64.png" onerror="this.style.display=&#39;none&#39;"><span class="sug-name">Calcanéus de Meliglours</span><span class="sug-type">Os</span><span class="sug-lvl">Niv.190</span></div><div class="sug-item"><img src="./Calculateur Craft Dofus_files/109610-64.png" onerror="this.style.display=&#39;none&#39;"><span class="sug-name">Œil de Rat du Gang</span><span class="sug-type">Œil</span><span class="sug-lvl">Niv.134</span></div><div class="api-badge">via dofusdude</div></div>
+        <div class="suggestions" id="suggestions" style="left: 563.5px; top: 229.333px; width: 613.833px;"><div class="sug-item"><img src="./Calculateur Craft Dofus_files/11229-64.png" onerror="this.style.display='none'"><span class="sug-name">Geta de Padgref</span><span class="sug-type">Bottes</span><span class="sug-lvl">Niv.196</span></div><div class="sug-item"><img src="./Calculateur Craft Dofus_files/16349-64.png" onerror="this.style.display='none'"><span class="sug-name">Coiffe de Padgref</span><span class="sug-type">Chapeau</span><span class="sug-lvl">Niv.198</span></div><div class="sug-item"><img src="./Calculateur Craft Dofus_files/9255-64.png" onerror="this.style.display='none'"><span class="sug-name">Anneau de Padgref</span><span class="sug-type">Anneau</span><span class="sug-lvl">Niv.197</span></div><div class="sug-item"><img src="./Calculateur Craft Dofus_files/77042-64.png" onerror="this.style.display='none'"><span class="sug-name">Fragment de carte de Padgref 5/5</span><span class="sug-type">Fragment de carte</span><span class="sug-lvl">Niv.130</span></div><div class="sug-item"><img src="./Calculateur Craft Dofus_files/77042-64.png" onerror="this.style.display='none'"><span class="sug-name">Fragment de carte de Padgref 4/5</span><span class="sug-type">Fragment de carte</span><span class="sug-lvl">Niv.130</span></div><div class="sug-item"><img src="./Calculateur Craft Dofus_files/77042-64.png" onerror="this.style.display='none'"><span class="sug-name">Fragment de carte de Padgref 1/5</span><span class="sug-type">Fragment de carte</span><span class="sug-lvl">Niv.130</span></div><div class="api-badge">via dofusdude</div></div>
       </div>
     </div>
   </div>
@@ -679,15 +701,15 @@ tr:hover td{background:#151a22}
     <div class="section-title s-red">▸ Ressources nécessaires</div>
     <div class="freshness-toolbar">
       <span class="freshness-help">● Fraîcheur des prix : vert ≤ 3 j · jaune ≤ 7 j · orange ≤ 14 j · rouge &gt; 14 j. Le bouton ↻ permet de confirmer qu’un prix inchangé est toujours à jour.</span>
-      <button id="freshness-filter-btn" class="freshness-filter-btn" type="button" onclick="toggleFreshnessFilter()">⏱ À actualiser (&gt; 7 j) <span id="freshness-filter-count">(4)</span></button>
+      <button id="freshness-filter-btn" class="freshness-filter-btn" type="button" onclick="toggleFreshnessFilter()">⏱ À actualiser (&gt; 7 j) <span id="freshness-filter-count">(8)</span></button>
     </div>
     <table>
       <thead><tr><th style="width:5%"></th><th style="width:31%">Ressource</th><th style="width:15%">Qté</th><th style="width:21%">Prix unit. (k)</th><th style="width:20%">Sous-total</th><th style="width:8%"></th></tr></thead>
-      <tbody id="rows"><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/47834-64.png" class="res-img" onerror="this.style.display=&#39;none&#39;"></td><td><input type="text" placeholder="Nom ressource" value="Griffe de Félygiène" oninput="onResourceNameChange(this)"><div class="price-freshness pf-unknown" title="Aucun prix mémorisé pour cette ressource." style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">Prix non vérifié</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: none;">↻</button></div></td><td><input type="number" value="10" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/4062-64.png" class="res-img" onerror="this.style.display=&#39;none&#39;"></td><td><input type="text" placeholder="Nom ressource" value="Calumet Zoth" oninput="onResourceNameChange(this)"><div class="price-freshness pf-unknown" title="Aucun prix mémorisé pour cette ressource." style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">Prix non vérifié</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: none;">↻</button></div></td><td><input type="number" value="10" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/36015-64.png" class="res-img" onerror="this.style.display=&#39;none&#39;"></td><td><input type="text" placeholder="Nom ressource" value="Feuille de Branche Soignante" oninput="onResourceNameChange(this)"><div class="price-freshness pf-unknown" title="Aucun prix mémorisé pour cette ressource." style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">Prix non vérifié</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: none;">↻</button></div></td><td><input type="number" value="5" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/151092-64.png" class="res-img" onerror="this.style.display=&#39;none&#39;"></td><td><input type="text" placeholder="Nom ressource" value="Forcené" oninput="onResourceNameChange(this)"><div class="price-freshness pf-unknown" title="Aucun prix mémorisé pour cette ressource." style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">Prix non vérifié</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: none;">↻</button></div></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/152001-64.png" class="res-img" onerror="this.style.display=&#39;none&#39;"></td><td><input type="text" placeholder="Nom ressource" value="Galet rayonnant" oninput="onResourceNameChange(this)"><div class="price-freshness pf-fresh" title="18/09/2026 16:02:41" style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">MAJ aujourd’hui</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: inline-block;">↻</button></div></td><td><input type="number" value="2" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="110000" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">220 000</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/12726-64.png" class="res-img" onerror="this.style.display=&#39;none&#39;"></td><td><input type="text" placeholder="Nom ressource" value="Substrat de Forêt" oninput="onResourceNameChange(this)"><div class="price-freshness pf-fresh" title="18/09/2026 16:02:35" style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">MAJ aujourd’hui</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: inline-block;">↻</button></div></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="26000" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">26 000</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/152004-64.png" class="res-img" onerror="this.style.display=&#39;none&#39;"></td><td><input type="text" placeholder="Nom ressource" value="Galet Solaire" oninput="onResourceNameChange(this)"><div class="price-freshness pf-fresh" title="18/09/2026 11:22:06" style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">MAJ aujourd’hui</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: inline-block;">↻</button></div></td><td><input type="number" value="2" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="3430" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">6 860</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/40704-64.png" class="res-img" onerror="this.style.display=&#39;none&#39;"></td><td><input type="text" placeholder="Nom ressource" value="Kobalite" oninput="onResourceNameChange(this)"><div class="price-freshness pf-fresh" title="18/09/2026 16:02:32" style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">MAJ aujourd’hui</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: inline-block;">↻</button></div></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="24000" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">24 000</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr></tbody>
+      <tbody id="rows"><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/59630-64.png" class="res-img" onerror="this.style.display='none'"></td><td><input type="text" placeholder="Nom ressource" value="Peau d'Ouilleur" oninput="onResourceNameChange(this)"><div class="price-freshness pf-unknown" title="Aucun prix mémorisé pour cette ressource." style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">Prix non vérifié</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: none;">↻</button></div></td><td><input type="number" value="47" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/15904-64.png" class="res-img" onerror="this.style.display='none'"></td><td><input type="text" placeholder="Nom ressource" value="Pagne de Trantroa" oninput="onResourceNameChange(this)"><div class="price-freshness pf-unknown" title="Aucun prix mémorisé pour cette ressource." style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">Prix non vérifié</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: none;">↻</button></div></td><td><input type="number" value="61" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/55019-64.png" class="res-img" onerror="this.style.display='none'"></td><td><input type="text" placeholder="Nom ressource" value="Étoffe du Roissingue" oninput="onResourceNameChange(this)"><div class="price-freshness pf-unknown" title="Aucun prix mémorisé pour cette ressource." style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">Prix non vérifié</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: none;">↻</button></div></td><td><input type="number" value="25" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/15901-64.png" class="res-img" onerror="this.style.display='none'"></td><td><input type="text" placeholder="Nom ressource" value="Corne de XLII" oninput="onResourceNameChange(this)"><div class="price-freshness pf-unknown" title="Aucun prix mémorisé pour cette ressource." style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">Prix non vérifié</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: none;">↻</button></div></td><td><input type="number" value="3" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/15762-64.png" class="res-img" onerror="this.style.display='none'"></td><td><input type="text" placeholder="Nom ressource" value="Encre du Kralamoure géant" oninput="onResourceNameChange(this)"><div class="price-freshness pf-unknown" title="Aucun prix mémorisé pour cette ressource." style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">Prix non vérifié</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: none;">↻</button></div></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/50708-64.png" class="res-img" onerror="this.style.display='none'"></td><td><input type="text" placeholder="Nom ressource" value="Eclat temporel" oninput="onResourceNameChange(this)"><div class="price-freshness pf-unknown" title="Aucun prix mémorisé pour cette ressource." style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">Prix non vérifié</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: none;">↻</button></div></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="0" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">0</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/177003-64.png" class="res-img" onerror="this.style.display='none'"></td><td><input type="text" placeholder="Nom ressource" value="Substrat de Sylve" oninput="onResourceNameChange(this)"><div class="price-freshness pf-unknown" title="Ancien prix mémorisé avant l’ajout du suivi des dates. Clique sur ↻ pour le confirmer." style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">Date de MAJ inconnue</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: inline-block;">↻</button></div></td><td><input type="number" value="1" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="63760" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">63 760</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr><tr><td style="width:36px;padding:4px 6px"><img src="./Calculateur Craft Dofus_files/50718-64.png" class="res-img" onerror="this.style.display='none'"></td><td><input type="text" placeholder="Nom ressource" value="Pépite" oninput="onResourceNameChange(this)"><div class="price-freshness pf-stale" title="18/09/2026 11:22:10" style="display: flex;"><span class="pf-dot">●</span><span class="pf-label">MAJ il y a 20 j</span><button class="pf-refresh" type="button" onclick="markResourcePriceFresh(this)" title="Marquer ce prix comme vérifié aujourd’hui" style="display: inline-block;">↻</button></div></td><td><input type="number" value="1500" min="0" style="width:80px;text-align:center" oninput="calc()"></td><td><input type="number" value="30" min="0" style="text-align:right" oninput="onResourcePriceChange(this)"></td><td class="subtotal">45 000</td><td><button class="del-btn" onclick="delRow(this)">×</button></td></tr></tbody>
       <tfoot>
         <tr class="total-row">
           <td colspan="3" style="text-align:right;padding:9px 12px">Coût total de craft</td>
-          <td style="text-align:right" id="total-cout">276 860</td>
+          <td style="text-align:right" id="total-cout">108 760</td>
           <td></td>
         </tr>
       </tfoot>
@@ -697,44 +719,34 @@ tr:hover td{background:#151a22}
 
   <div class="section">
     <div class="section-title s-green">▸ Prix de vente HDV</div>
-    <div class="param-row">
-      <span class="param-label">💹 Prix marché HDV</span>
-      <input class="param-input" type="number" id="hdv-marche" value="0" min="0" oninput="calc()">
-      <span class="param-unit">kamas</span>
-      <span class="param-val" style="font-size:11px;color:#2ecc71" id="apres-taxe-marche">Net : 0 k</span>
-    </div>
-    <div class="param-row">
-      <span class="param-label">✨ Prix de vente final</span>
+<div class="param-row">
+      <span class="param-label">✨ Prix de vente HDV</span>
       <input class="param-input" type="number" id="hdv-vendeur" value="0" min="0" oninput="calc()">
       <span class="param-unit">kamas</span>
       <span class="param-val" style="font-size:11px;color:#f39c12" id="apres-taxe-vendeur">Net : 0 k</span>
       <button onclick="mettreEnVente()" style="flex-shrink:0;padding:6px 14px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #e94560;background:#2a0010;color:#e94560;font-family:Arial,sans-serif;white-space:nowrap">🏷️ Mettre en vente</button>
     </div>
-    <div style="margin:0 18px 12px;padding:10px 14px;background:#12122a;border-radius:8px;border:1px solid #2a2a4a;font-size:11px;color:#666;line-height:1.7">
-      <div>📌 <strong style="color:#aaa">Prix net</strong> = ce qui revient réellement en banque après la taxe HDV de <strong style="color:#aaa">2%</strong></div>
-      <div id="explication-diff" style="margin-top:4px;color:#666">💡 Remplis les deux prix pour voir la différence entre marché et ton prix de vente final.</div>
+    <div class="param-row ten-volume-row">
+      <span class="param-label">📊 Ventes sur 30 jours (Cours du marché)</span>
+      <input class="param-input" type="number" id="ventes-30j" min="0" step="1" placeholder="Ex : 350" oninput="calc()">
+      <span class="param-unit">ventes</span>
+      <span class="param-val" id="ventes-30j-avis">Non renseigné</span>
     </div>
   </div>
 
-  <div class="section">
+<div class="section">
     <div class="section-title s-dark">▸ Résultats</div>
     <div class="metrics">
-      <div class="metric"><div class="ml">Coût craft</div><div class="mv" id="r-cout">276 860</div></div>
-      <div class="metric"><div class="ml" style="color:#666">─</div><div class="mv" style="font-size:13px;color:#555">Taxe 2%</div></div>
+      <div class="metric"><div class="ml">Coût craft</div><div class="mv" id="r-cout">108 760</div></div>
+      <div class="metric"><div class="ml">HDV</div><div class="mv" style="font-size:20px;color:#e8e9ed">Taxe 2%</div></div>
     </div>
     <div style="padding:0 18px 8px">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <div style="background:#12122a;border:1px solid #2a2a4a;border-radius:8px;padding:10px 14px">
-          <div style="font-size:11px;color:#2ecc71;margin-bottom:6px">💹 PRIX MARCHÉ HDV</div>
-          <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;color:#666">Net après taxe</span><span style="font-size:13px" id="r-net-marche">0 k</span></div>
-          <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;color:#666">Profit</span><span style="font-size: 13px; font-weight: bold; color: rgb(231, 76, 60);" id="r-profit-marche">-276 860 k</span></div>
-          <div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:#666">Rentabilité</span><span style="font-size: 13px; font-weight: bold; color: rgb(231, 76, 60);" id="r-pct-marche">-100.0%</span></div>
-        </div>
-        <div style="background:#12122a;border:1px solid #2a2a4a;border-radius:8px;padding:10px 14px">
-          <div style="font-size:11px;color:#f39c12;margin-bottom:6px">✨ PRIX DE VENTE FINAL</div>
-          <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;color:#666">Net après taxe</span><span style="font-size:13px" id="r-net-vendeur">0 k</span></div>
-          <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;color:#666">Profit</span><span style="font-size: 13px; font-weight: bold; color: rgb(231, 76, 60);" id="r-profit-vendeur">-276 860 k</span></div>
-          <div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:#666">Rentabilité</span><span style="font-size: 13px; font-weight: bold; color: rgb(231, 76, 60);" id="r-pct-vendeur">-100.0%</span></div>
+      <div style="display:grid;grid-template-columns:1fr;gap:8px">
+        <div style="background:#12122a;border:1px solid #2a2a4a;border-radius:8px;padding:14px 18px">
+          <div style="font-size:16px;font-weight:700;color:#f39c12;margin-bottom:10px">✨ PRIX DE VENTE HDV</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:7px"><span style="font-size:14px;color:#e8e9ed;font-weight:500">Net après taxe</span><span style="font-size:16px;font-weight:700;color:#e8e9ed" id="r-net-vendeur">0 k</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:7px"><span style="font-size:14px;color:#e8e9ed;font-weight:500">Profit</span><span style="font-size:16px;font-weight:700;color:#e74c3c" id="r-profit-vendeur">-108 760 k</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><span style="font-size:14px;color:#e8e9ed;font-weight:500">Rentabilité</span><span style="font-size:16px;font-weight:700;color:#e74c3c" id="r-pct-vendeur">-100.0%</span></div>
         </div>
       </div>
     </div>
@@ -751,15 +763,15 @@ tr:hover td{background:#151a22}
     <div style="padding:10px 18px 0;border-bottom:1px solid #2a2a4a">
       <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px">
         <span style="font-size:11px;color:#666;white-space:nowrap">📁 Dossiers :</span>
-        <div id="dossiers-tabs" style="display:flex;gap:4px;flex-wrap:wrap;flex:1"><button class="dossier-btn dossier-btn-all dossier-btn-active" onclick="setDossierActif(null)">📂 Tous</button><button class="dossier-btn " onclick="setDossierActif(1789741663622)" title="Trophée MàJ 3.7">📁 Trophée MàJ 3.7 <span style="font-size:10px;opacity:0.6">0</span></button></div>
+        <div id="dossiers-tabs" style="display:flex;gap:4px;flex-wrap:wrap;flex:1"><button class="dossier-btn dossier-btn-all dossier-btn-active" onclick="setDossierActif(null)" ondragover="allowDossierDrop(event)" ondragleave="clearDossierDrop(event)" ondrop="handleDossierDrop(event,null)" title="Glisser un craft ici pour le retirer de son dossier">📂 Tous</button><button class="dossier-btn " onclick="setDossierActif(1789741663622)" ondragover="allowDossierDrop(event)" ondragleave="clearDossierDrop(event)" ondrop="handleDossierDrop(event,1789741663622)" title="Glisser un craft dans Trophée MàJ 3.7">📁 Trophée MàJ 3.7 <span style="font-size:10px;opacity:0.6">0</span></button></div>
         <button onclick="openModalNouveauDossier()" style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #4a235a;background:#1a0a2a;color:#9b59b6;font-family:Arial,sans-serif;white-space:nowrap">+ Nouveau dossier</button>
       </div>
     </div>
     <div style="display:flex;gap:6px;padding:10px 18px 8px;flex-wrap:wrap">
-      <button id="sort-btn-recent" onclick="setSavesSort(&#39;recent&#39;)" class="sort-btn sort-btn-active">⬇ Récent</button>
-      <button id="sort-btn-ancien" onclick="setSavesSort(&#39;ancien&#39;)" class="sort-btn">⬆ Ancien</button>
-      <button id="sort-btn-nom" onclick="setSavesSort(&#39;nom&#39;)" class="sort-btn">🔤 Nom Z→A</button>
-      <button id="sort-btn-rentabilite" onclick="setSavesSort(&#39;rentabilite&#39;)" class="sort-btn">📈 Plus rent.</button>
+      <button id="sort-btn-recent" onclick="setSavesSort('recent')" class="sort-btn sort-btn-active">⬇ Récent</button>
+      <button id="sort-btn-ancien" onclick="setSavesSort('ancien')" class="sort-btn">⬆ Ancien</button>
+      <button id="sort-btn-nom" onclick="setSavesSort('nom')" class="sort-btn">🔤 Nom Z→A</button>
+      <button id="sort-btn-rentabilite" onclick="setSavesSort('rentabilite')" class="sort-btn">📈 Plus rent.</button>
     </div>
     <div class="ten-backup-bar" style="display:flex;gap:8px;padding:14px 18px 12px">
       <button onclick="exportSaves()" style="flex:1;padding:9px;border-radius:8px;font-size:12px;font-weight:bold;cursor:pointer;border:1px solid #1e5c3a;background:#1e1e35;color:#2ecc71;font-family:Arial,sans-serif">📤 Exporter (.json)</button>
@@ -768,30 +780,28 @@ tr:hover td{background:#151a22}
         <input type="file" accept=".json" style="display:none" onchange="importSaves(this)">
       </label>
     </div>
-    <div class="saves-list" id="saves-list" style="padding:0 18px 14px"><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/151093-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Forcené majeur</span><span class="si-date">18/09/2026</span><span class="si-profit neg">-276 860 k (-100.0%)</span><button class="si-load" onclick="loadSave(1789741641342)" title="Charger">Charger</button><button onclick="deplacerCraft(1789741641342)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1789741641342)" title="Supprimer">×</button></div><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/151096-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Astucieux majeur</span><span class="si-date">18/09/2026</span><span class="si-profit neg">-276 860 k (-100.0%)</span><button class="si-load" onclick="loadSave(1789741629966)" title="Charger">Charger</button><button onclick="deplacerCraft(1789741629966)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1789741629966)" title="Supprimer">×</button></div><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/151099-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Equilibriste majeur</span><span class="si-date">18/09/2026</span><span class="si-profit neg">-276 860 k (-100.0%)</span><button class="si-load" onclick="loadSave(1789741623598)" title="Charger">Charger</button><button onclick="deplacerCraft(1789741623598)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1789741623598)" title="Supprimer">×</button></div><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/151102-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Taquin majeur</span><span class="si-date">18/09/2026</span><span class="si-profit neg">-276 860 k (-100.0%)</span><button class="si-load" onclick="loadSave(1789741612366)" title="Charger">Charger</button><button onclick="deplacerCraft(1789741612366)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1789741612366)" title="Supprimer">×</button></div><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/151048-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Porteur majeur</span><span class="si-date">18/09/2026</span><span class="si-profit neg">-270 000 k (-100.0%)</span><button class="si-load" onclick="loadSave(1789741496007)" title="Charger">Charger</button><button onclick="deplacerCraft(1789741496007)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1789741496007)" title="Supprimer">×</button></div><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/151033-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Furibond majeur</span><span class="si-date">18/09/2026</span><span class="si-profit neg">-270 000 k (-100.0%)</span><button class="si-load" onclick="loadSave(1789741401510)" title="Charger">Charger</button><button onclick="deplacerCraft(1789741401510)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1789741401510)" title="Supprimer">×</button></div><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/151003-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Acrobate majeur</span><span class="si-date">18/09/2026</span><span class="si-profit neg">-270 000 k (-100.0%)</span><button class="si-load" onclick="loadSave(1789741395926)" title="Charger">Charger</button><button onclick="deplacerCraft(1789741395926)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1789741395926)" title="Supprimer">×</button></div><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/151072-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Savant majeur</span><span class="si-date">18/09/2026</span><span class="si-profit neg">-270 000 k (-100.0%)</span><button class="si-load" onclick="loadSave(1789741380966)" title="Charger">Charger</button><button onclick="deplacerCraft(1789741380966)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1789741380966)" title="Supprimer">×</button></div><div class="save-item"><img class="si-img" src="./Calculateur Craft Dofus_files/151045-64.png" onerror="this.style.display=&#39;none&#39;"><span class="si-name">Joueur majeur</span><span class="si-date">18/09/2026</span><span class="si-profit pos">+245 580 k (+50.6%)</span><button class="si-load" onclick="loadSave(1789740206576)" title="Charger">Charger</button><button onclick="deplacerCraft(1789740206576)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color=&#39;#9b59b6&#39;" onmouseout="this.style.color=&#39;#4a235a&#39;">📁</button><button class="si-del" onclick="deleteSave(1789740206576)" title="Supprimer">×</button></div></div>
+    <div class="saves-list" id="saves-list" style="padding:0 18px 14px"><div class="save-item" draggable="true" ondragstart="handleCraftDragStart(event,1791378405815)" ondragend="handleCraftDragEnd(event)"><img class="si-img" src="./Calculateur Craft Dofus_files/16555-64.png" onerror="this.style.display='none'"><span class="si-name">Couronne de Brâm Barbe-Monde</span><span class="si-date">07/10/2026</span><span class="si-profit pos">+1 057 000 k (+8.3%)</span><button class="si-load" onclick="loadSave(1791378405815)" title="Charger">Charger</button><button onclick="deplacerCraft(1791378405815)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color='#9b59b6'" onmouseout="this.style.color='#4a235a'">📁</button><button class="si-del" onclick="deleteSave(1791378405815)" title="Supprimer">×</button></div><div class="save-item" draggable="true" ondragstart="handleCraftDragStart(event,1791362503787)" ondragend="handleCraftDragEnd(event)"><img class="si-img" src="./Calculateur Craft Dofus_files/9392-64.png" onerror="this.style.display='none'"><span class="si-name">Ponctualité d'Henual</span><span class="si-date">07/10/2026</span><span class="si-profit pos">+1 457 550 k (+14.9%)</span><button class="si-load" onclick="loadSave(1791362503787)" title="Charger">Charger</button><button onclick="deplacerCraft(1791362503787)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color='#9b59b6'" onmouseout="this.style.color='#4a235a'">📁</button><button class="si-del" onclick="deleteSave(1791362503787)" title="Supprimer">×</button></div><div class="save-item" draggable="true" ondragstart="handleCraftDragStart(event,1790943114954)" ondragend="handleCraftDragEnd(event)"><img class="si-img" src="./Calculateur Craft Dofus_files/10338-64.png" onerror="this.style.display='none'"><span class="si-name">Ceinture des Chocomanciens</span><span class="si-date">02/10/2026</span><span class="si-profit pos">+781 000 k (+11.1%)</span><button class="si-load" onclick="loadSave(1790943114954)" title="Charger">Charger</button><button onclick="deplacerCraft(1790943114954)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color='#9b59b6'" onmouseout="this.style.color='#4a235a'">📁</button><button class="si-del" onclick="deleteSave(1790943114954)" title="Supprimer">×</button></div><div class="save-item" draggable="true" ondragstart="handleCraftDragStart(event,1790933016695)" ondragend="handleCraftDragEnd(event)"><img class="si-img" src="./Calculateur Craft Dofus_files/217023-64.png" onerror="this.style.display='none'"><span class="si-name">Prycipithon Iridescente</span><span class="si-date">02/10/2026</span><span class="si-profit neg">-484 920 k (-10.7%)</span><button class="si-load" onclick="loadSave(1790933016695)" title="Charger">Charger</button><button onclick="deplacerCraft(1790933016695)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color='#9b59b6'" onmouseout="this.style.color='#4a235a'">📁</button><button class="si-del" onclick="deleteSave(1790933016695)" title="Supprimer">×</button></div><div class="save-item" draggable="true" ondragstart="handleCraftDragStart(event,1790932311824)" ondragend="handleCraftDragEnd(event)"><img class="si-img" src="./Calculateur Craft Dofus_files/11267-64.png" onerror="this.style.display='none'"><span class="si-name">Bottes du Katcheur</span><span class="si-date">02/10/2026</span><span class="si-profit pos">+785 540 k (+61.7%)</span><button class="si-load" onclick="loadSave(1790932311824)" title="Charger">Charger</button><button onclick="deplacerCraft(1790932311824)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color='#9b59b6'" onmouseout="this.style.color='#4a235a'">📁</button><button class="si-del" onclick="deleteSave(1790932311824)" title="Supprimer">×</button></div><div class="save-item" draggable="true" ondragstart="handleCraftDragStart(event,1790932112760)" ondragend="handleCraftDragEnd(event)"><img class="si-img" src="./Calculateur Craft Dofus_files/16439-64.png" onerror="this.style.display='none'"><span class="si-name">Masque du Katcheur</span><span class="si-date">02/10/2026</span><span class="si-profit pos">+586 450 k (+22.2%)</span><button class="si-load" onclick="loadSave(1790932112760)" title="Charger">Charger</button><button onclick="deplacerCraft(1790932112760)" title="Déplacer dans un dossier" style="background:none;border:none;color:#4a235a;cursor:pointer;font-size:14px;padding:0 4px" onmouseover="this.style.color='#9b59b6'" onmouseout="this.style.color='#4a235a'">📁</button><button class="si-del" onclick="deleteSave(1790932112760)" title="Supprimer">×</button></div></div>
   </div>
 
   </div><!-- /tab-calc -->
 
   <!-- Onglet Historique des ventes -->
-  <div id="tab-ventes" style="display:none">
+  <div id="tab-ventes" style="display: none;">
     <div class="section">
       <div class="section-title" style="background:#4a1a30">🏷️ Ventes en cours</div>
       <div style="display:flex;gap:8px;padding:12px 18px;flex-wrap:wrap;align-items:center">
         <span style="font-size:12px;color:#aaa;flex:1">Items mis en vente — prix de craft figés au moment de la mise en vente.</span>
       </div>
-      <div id="ventes-list" style="padding:0 18px 14px">
-        <div id="ventes-empty" style="color:#555;font-size:12px;font-style:italic;padding:12px 0">Aucune vente en cours. Utilisez "Mettre en vente" dans le Calculateur.</div>
-      </div>
+      <div id="ventes-list" style="padding:0 18px 14px"><div style="color:#555;font-size:12px;font-style:italic;padding:12px 0">Aucune vente en cours. Utilisez "Mettre en vente" dans le Calculateur.</div></div>
     </div>
   </div><!-- /tab-ventes -->
 
-  <div id="tab-histo" style="display:none">
+  <div id="tab-histo" style="display: none;">
     <div class="section">
       <div class="section-title" style="background:#1a4a6a">📊 Historique des ventes</div>
       <div style="display:flex;gap:8px;padding:12px 18px;flex-wrap:wrap;align-items:center">
         <button id="histo-vue-btn" onclick="toggleHistoVue()" style="padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #9b59b6;background:#1a0a2a;color:#c39bd3;font-family:Arial,sans-serif">📦 Vue par item</button>
-        <button id="histo-sort-btn" onclick="toggleHistoSort()" style="padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #2a2a4a;background:#1e1e35;color:#666;font-family:Arial,sans-serif">📈 Trier par renta</button>
+        <button id="histo-sort-btn" onclick="toggleHistoSort()" style="padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer; border: 1px solid rgb(42, 42, 74); background: rgb(30, 30, 53); color: rgb(102, 102, 102); font-family: Arial, sans-serif;">Trier par renta</button>
         <span style="font-size:12px;color:#aaa;flex:1"></span>
         <button onclick="clearHisto()" style="padding:6px 12px;border-radius:6px;font-size:11px;font-weight:bold;cursor:pointer;border:1px solid #c0392b;background:#2a1010;color:#e74c3c;font-family:Arial,sans-serif">🗑️ Tout effacer</button>
       </div>
@@ -812,7 +822,7 @@ tr:hover td{background:#151a22}
           </thead>
           <tbody id="histo-rows"></tbody>
         </table>
-        <div id="histo-empty" style="color:#555;font-size:12px;font-style:italic;padding:12px 0;display:none">Aucune vente enregistrée pour l'instant.</div>
+        <div id="histo-empty" style="color: rgb(85, 85, 85); font-size: 12px; font-style: italic; padding: 12px 0px; display: block;">Aucune vente enregistrée pour l'instant.</div>
       </div>
     </div>
   </div><!-- /tab-histo -->
@@ -1092,45 +1102,32 @@ function calc(){
   });
   applyFreshnessFilter();
   const TAXE=0.02;
-  const hdvM=parseFloat(document.getElementById('hdv-marche').value)||0;
   const hdvV=parseFloat(document.getElementById('hdv-vendeur').value)||0;
-  const netM=hdvM*(1-TAXE);
   const netV=hdvV*(1-TAXE);
-  const profitM=netM-cout;
   const profitV=netV-cout;
-  const pctM=cout>0?(profitM/cout*100):null;
   const pctV=cout>0?(profitV/cout*100):null;
   document.getElementById('total-cout').textContent=fmt(cout);
-  document.getElementById('apres-taxe-marche').textContent='Net : '+fmt(netM)+' k';
   document.getElementById('apres-taxe-vendeur').textContent='Net : '+fmt(netV)+' k';
   document.getElementById('r-cout').textContent=fmt(cout);
-  const rpm=document.getElementById('r-profit-marche');
-  rpm.textContent=(profitM>=0?'+':'')+fmt(profitM)+' k';
-  rpm.style.color=profitM>=0?'#2ecc71':'#e74c3c';
-  document.getElementById('r-net-marche').textContent=fmt(netM)+' k';
-  const rpmPct=document.getElementById('r-pct-marche');
-  if(pctM===null){rpmPct.textContent='—';rpmPct.style.color='#555';}
-  else{rpmPct.textContent=fmtPct(pctM);rpmPct.style.color=pctM>=0?'#2ecc71':'#e74c3c';}
   const rpv=document.getElementById('r-profit-vendeur');
   rpv.textContent=(profitV>=0?'+':'')+fmt(profitV)+' k';
-  rpv.style.color=profitV>=0?'#f39c12':'#e74c3c';
+  rpv.style.color=profitV>=0?'#2ecc71':'#e74c3c';
   document.getElementById('r-net-vendeur').textContent=fmt(netV)+' k';
   const rpvPct=document.getElementById('r-pct-vendeur');
-  if(pctV===null){rpvPct.textContent='—';rpvPct.style.color='#555';}
-  else{rpvPct.textContent=fmtPct(pctV);rpvPct.style.color=pctV>=0?'#f39c12':'#e74c3c';}
-  const diff=hdvV-hdvM;
-  const expEl=document.getElementById('explication-diff');
-  if(hdvM>0&&hdvV>0){
-    const msg=diff>=0
-      ?`✨ Avec ton FM, tu vends <strong style="color:#f39c12">${fmt(Math.abs(diff))} k de plus</strong> que le marché — soit <strong style="color:#f39c12">${fmt(Math.abs(netV-netM))} k de plus</strong> en banque.`
-      :`⚠ Ton prix de vente final est <strong style="color:#e74c3c">${fmt(Math.abs(diff))} k en dessous</strong> du marché.`;
-    expEl.innerHTML=msg;
-  }else{expEl.innerHTML='💡 Remplis les deux prix pour voir la différence entre marché et ton prix de vente final.';}
+  if(pctV===null){rpvPct.textContent='—';rpvPct.style.color='#fff';}
+  else{rpvPct.textContent=fmtPct(pctV);rpvPct.style.color=pctV>=0?'#2ecc71':'#e74c3c';}
+  const volumeEl=document.getElementById('ventes-30j');
+  const volumeAvis=document.getElementById('ventes-30j-avis');
+  const volume=volumeEl.value.trim()===''?null:Number(volumeEl.value);
+  if(volume===null||!Number.isFinite(volume)||volume<0){volumeAvis.textContent='Non renseigné';volumeAvis.style.color='#fff';}
+  else if(volume>=250){volumeAvis.textContent='✓ Demande intéressante';volumeAvis.style.color='#2ecc71';}
+  else{volumeAvis.textContent='⚠ Demande limitée';volumeAvis.style.color='#f4b400';}
   const v=document.getElementById('verdict');
-  if(cout===0&&hdvM===0&&hdvV===0){v.textContent='— Entrez vos données —';v.className='verdict v-neutral';}
-  else if(profitM>=0){v.textContent='✓  RENTABLE au prix marché';v.className='verdict v-ok';}
-  else if(profitV>=0){v.textContent='⚠  Rentable seulement avec FM';v.className='verdict v-ko';v.style.background='#4a3500';v.style.borderColor='#f39c12';v.style.color='#f39c12';}
-  else{v.textContent='✗  PAS RENTABLE — Craft déconseillé';v.className='verdict v-ko';v.style.background='';v.style.borderColor='';v.style.color='';}
+  v.style.background='';v.style.borderColor='';v.style.color='';
+  if(cout===0&&hdvV===0){v.textContent='— Renseigne le coût et le prix de vente —';v.className='verdict v-neutral';}
+  else if(hdvV<=0){v.textContent='— Renseigne le prix de vente HDV —';v.className='verdict v-neutral';}
+  else if(profitV>=0){v.textContent='✓ RENTABLE — Profit estimé après taxe HDV';v.className='verdict v-ok';}
+  else{v.textContent='✗ PAS RENTABLE — Craft déconseillé';v.className='verdict v-ko';}
 }
 
 // ========== FORMULAIRE ==========
@@ -1140,7 +1137,7 @@ function resetForm(){
   equipImg.src='';equipImg.classList.remove('visible');
   document.getElementById('rows').innerHTML='';
   for(let i=0;i<8;i++)addRow();
-  document.getElementById('hdv-marche').value=0;
+  document.getElementById('ventes-30j').value='';
   document.getElementById('hdv-vendeur').value=0;
   calc();
   document.getElementById('equip-name').focus();
@@ -1152,17 +1149,18 @@ function saveData(){
   if(!equipName){alert('Entre d\'abord le nom de l\'équipement.');document.getElementById('equip-name').focus();return;}
   const rows=getRows().filter(r=>r.name||r.prix>0);
   if(rows.length===0){alert('Rien à sauvegarder.');return;}
-  const hdv=parseFloat(document.getElementById('hdv-marche').value)||0;
+  const hdv=parseFloat(document.getElementById('hdv-vendeur').value)||0;
   const taxe=2;
   const cout=rows.reduce((s,r)=>s+r.qty*r.prix,0);
   const net=hdv*(1-taxe/100);
   const profit=net-cout;
   const existing=saves.findIndex(x=>x.name===equipName);
-  const hdvV=parseFloat(document.getElementById('hdv-vendeur').value)||0;
+  const hdvV=hdv;
+  const ventes30j=document.getElementById('ventes-30j').value.trim()===''?null:Number(document.getElementById('ventes-30j').value);
   const equipImg=document.getElementById('equip-img');
   const equipImgSrc=equipImg.classList.contains('visible')?equipImg.src:'';
   const dossierId=existing>=0?saves[existing].dossierId:undefined;
-  const save={id:existing>=0?saves[existing].id:Date.now(),name:equipName,equipImg:equipImgSrc,rows,hdv,hdvV,taxe,profit,date:new Date().toLocaleDateString('fr-FR'),updatedAt:Date.now()};
+  const save={id:existing>=0?saves[existing].id:Date.now(),name:equipName,equipImg:equipImgSrc,rows,hdv,hdvV,ventes30j,taxe,profit,date:new Date().toLocaleDateString('fr-FR'),updatedAt:Date.now()};
   if(dossierId!==undefined)save.dossierId=dossierId;
   if(existing>=0){saves[existing]=save;}else{saves.unshift(save);}
   localStorage.setItem('dofus_craft_saves',JSON.stringify(saves));
@@ -1179,8 +1177,8 @@ function loadSave(id){
   else{equipImg.classList.remove('visible');}
   document.getElementById('rows').innerHTML='';
   s.rows.forEach(r=>addRow(r.name,r.qty,r.prix,r.img||''));
-  document.getElementById('hdv-marche').value=s.hdv||0;
-  document.getElementById('hdv-vendeur').value=s.hdvV||0;
+  document.getElementById('hdv-vendeur').value=s.hdvV??s.hdv??0;
+  document.getElementById('ventes-30j').value=s.ventes30j??'';
   calc();
 }
 
@@ -1219,7 +1217,7 @@ function renderDossiersTabs(){
   let html=`<button class="dossier-btn dossier-btn-all ${dossierActif===null?'dossier-btn-active':''}" onclick="setDossierActif(null)" ondragover="allowDossierDrop(event)" ondragleave="clearDossierDrop(event)" ondrop="handleDossierDrop(event,null)" title="Glisser un craft ici pour le retirer de son dossier">📂 Tous</button>`;
   dossiers.forEach(d=>{
     const count=saves.filter(s=>s.dossierId===d.id).length;
-    html+=`<button class="dossier-btn ${dossierActif===d.id?'dossier-btn-active':''}" onclick="setDossierActif(${d.id})" ondragover="allowDossierDrop(event)" ondragleave="clearDossierDrop(event)" ondrop="handleDossierDrop(event,${d.id})" title="Glisser un craft dans ${d.name}">📁 ${d.name} <span style="font-size:10px;opacity:0.6">${count}</span></button>`;
+    html+=`<span class="dossier-tab-wrap"><button class="dossier-btn ${dossierActif===d.id?'dossier-btn-active':''}" onclick="setDossierActif(${d.id})" ondragover="allowDossierDrop(event)" ondragleave="clearDossierDrop(event)" ondrop="handleDossierDrop(event,${d.id})" title="Glisser un craft dans ce dossier">📁 ${d.name} <span style="font-size:10px;opacity:0.85">${count}</span></button><button type="button" class="dossier-delete" onclick="supprimerDossier(${d.id})" title="Supprimer ce dossier" aria-label="Supprimer le dossier ${d.name}">×</button></span>`;
   });
   el.innerHTML=html;
 }
@@ -1289,7 +1287,10 @@ function creerDossier(){
 }
 
 function supprimerDossier(id){
-  if(!confirm('Supprimer ce dossier ? Les crafts dedans seront déplacés dans "Tous".'))return;
+  const dossier=dossiers.find(d=>d.id===id);
+  if(!dossier)return;
+  const nb=saves.filter(x=>x.dossierId===id).length;
+  if(!confirm(`Supprimer définitivement le dossier « ${dossier.name} » ?\n\n${nb} craft(s) seront conservés et déplacés dans « Tous ».\n\nConfirmer la suppression ?`))return;
   dossiers=dossiers.filter(d=>d.id!==id);
   saves.forEach(s=>{if(s.dossierId===id)delete s.dossierId;});
   localStorage.setItem('dofus_craft_saves',JSON.stringify(saves));
@@ -1731,6 +1732,7 @@ renderSaves();
 updateAllFreshnessUi();
 
 </script>
+
 
 
 
